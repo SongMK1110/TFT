@@ -1,3 +1,4 @@
+import { itemIconUrls } from '../../assets/itemIcons';
 import { getItemById } from '../../data/items';
 import { useGameStore } from '../../store/useGameStore';
 import styles from './ItemChoiceOverlay.module.css';
@@ -32,7 +33,9 @@ export function ItemChoiceOverlay() {
                 key={`${itemId}-${index}`}
                 onClick={() => selectItemChoice(itemId)}
               >
-                <span className={styles.icon}>{item.name.slice(0, 2)}</span>
+                <span className={styles.icon}>
+                  <img src={itemIconUrls[item.id]} alt="" />
+                </span>
                 <strong>{item.name}</strong>
                 <p>{item.description}</p>
               </button>

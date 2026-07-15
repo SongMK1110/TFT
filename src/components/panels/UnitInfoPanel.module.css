@@ -150,7 +150,9 @@
 
 .itemButton {
   display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
   gap: 3px;
+  align-items: center;
   width: 100%;
   min-height: 42px;
   padding: 7px 8px;
@@ -160,6 +162,19 @@
   text-align: left;
   background: rgba(30, 41, 59, 0.62);
   cursor: pointer;
+}
+
+.itemIcon {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.itemCopy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
 }
 
 .itemButton:disabled {
@@ -173,7 +188,8 @@
   overflow-wrap: anywhere;
 }
 
-.itemButton span,
+.itemButton > span,
+.itemCopy > span,
 .emptyText {
   color: #94a3b8;
   font-size: 0.68rem;

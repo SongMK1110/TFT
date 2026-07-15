@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { itemIconUrls } from '../../assets/itemIcons';
 import { getItemById } from '../../data/items';
 import { featuredUnit } from '../../data/uiFixtures';
 import { calculateUnitSellGold } from '../../game/core/economy/unitSellSystem';
@@ -101,8 +102,11 @@ export function UnitInfoPanel() {
                   onClick={() => unequipItemFromUnit(displayedUnit.instanceId, index)}
                   disabled={isFallbackUnit}
                 >
-                  <strong>{item.name}</strong>
-                  <span>{item.description}</span>
+                  <img className={styles.itemIcon} src={itemIconUrls[item.id]} alt="" />
+                  <span className={styles.itemCopy}>
+                    <strong>{item.name}</strong>
+                    <span>{item.description}</span>
+                  </span>
                 </button>
               ))
             ) : (
@@ -132,8 +136,11 @@ export function UnitInfoPanel() {
                     onClick={() => equipItemToUnit(itemId, displayedUnit.instanceId)}
                     disabled={!canEquipItem}
                   >
-                    <strong>{item.name}</strong>
-                    <span>{item.description}</span>
+                    <img className={styles.itemIcon} src={itemIconUrls[item.id]} alt="" />
+                    <span className={styles.itemCopy}>
+                      <strong>{item.name}</strong>
+                      <span>{item.description}</span>
+                    </span>
                   </button>
                 );
               })
