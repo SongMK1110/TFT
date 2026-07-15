@@ -46,7 +46,11 @@ export class BattleScene extends Phaser.Scene {
     this.renderBoard();
     this.syncBgm(useGameStore.getState().phase);
     this.unsubscribeStore = useGameStore.subscribe((state, previousState) => {
-      const shouldRefreshDragHighlight = state.dragState !== previousState.dragState;
+      const shouldRefreshDragHighlight =
+        state.dragState?.source.kind === 'bench' ||
+        state.dragState?.source.kind === 'item' ||
+        previousState.dragState?.source.kind === 'bench' ||
+        previousState.dragState?.source.kind === 'item';
 
       if (state.phase !== previousState.phase) {
         this.syncBgm(state.phase);
