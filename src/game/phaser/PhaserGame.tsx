@@ -36,16 +36,6 @@ export function PhaserGame() {
   const gameRef = useRef<Phaser.Game | null>(null);
   const [pointerPosition, setPointerPosition] = useState<{ x: number; y: number }>();
   const dragState = useGameStore((state) => state.dragState);
-  const boardUnits = useGameStore((state) => state.boardUnits);
-  const combatState = useGameStore((state) => state.combatState);
-  const phase = useGameStore((state) => state.phase);
-  const level = useGameStore((state) => state.level);
-
-  const refreshBattleScene = () => {
-    const scene = gameRef.current?.scene.getScene('BattleScene') as BattleScene | undefined;
-
-    scene?.refreshBoard();
-  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -99,12 +89,11 @@ export function PhaserGame() {
       }
 
       state.placeBenchUnitOnBoard(state.dragState.source.benchIndex, position);
-
-      (battleScene as BattleScene | undefined)?.refreshBoard();
     };
 
     const handlePointerUp = (event: PointerEvent) => {
       placeDraggingBenchUnit(event.clientX, event.clientY);
+      setPointerPosition(undefined);
     };
     const handlePointerMove = (event: PointerEvent) => {
       setPointerPosition({ x: event.clientX, y: event.clientY });
@@ -120,16 +109,6 @@ export function PhaserGame() {
       gameRef.current = null;
     };
   }, []);
-
-  useEffect(() => {
-    if (!dragState) {
-      setPointerPosition(undefined);
-    }
-  }, [dragState]);
-
-  useEffect(() => {
-    refreshBattleScene();
-  }, [boardUnits, combatState, phase, level]);
 
   const draggedBenchUnit = dragState?.source.kind === 'bench' ? dragState.unit : undefined;
   const dragPreviewImage = draggedBenchUnit ? unitPortraits[draggedBenchUnit.unitId] : undefined;
