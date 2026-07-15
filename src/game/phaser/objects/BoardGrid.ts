@@ -706,12 +706,13 @@ export class BoardGrid {
     const sourceCenter = boardToPhaserPosition(source.position, layout);
     const targetCenter = boardToPhaserPosition(target.position, layout);
     const distance = Math.hypot(targetCenter.x - sourceCenter.x, targetCenter.y - sourceCenter.y);
+    const shouldFaceLeft = targetCenter.x < sourceCenter.x;
 
     if (sourceView) {
-      const shouldFaceLeft = targetCenter.x === sourceCenter.x
+      const attackShouldFaceLeft = targetCenter.x === sourceCenter.x
         ? (sourceView.getData('idleFlipX') as boolean)
-        : targetCenter.x < sourceCenter.x;
-      this.playUnitAttackAnimation(sourceView, shouldFaceLeft);
+        : shouldFaceLeft;
+      this.playUnitAttackAnimation(sourceView, attackShouldFaceLeft);
       const directionX = distance > 0 ? (targetCenter.x - sourceCenter.x) / distance : 0;
       const directionY = distance > 0 ? (targetCenter.y - sourceCenter.y) / distance : 0;
 
@@ -742,13 +743,13 @@ export class BoardGrid {
     } else if (source.unitId === 'dawn-warden') {
       this.playDawnWardenRadiantBashEffect(targetCenter, layout);
     } else if (source.unitId === 'ember-guard') {
-      this.playGeneratedBasicImpact(targetCenter, layout, EMBER_GUARD_EMBER_BASH_KEY, EMBER_GUARD_EMBER_BASH_ANIMATION_KEY, 0.82);
+      this.playGeneratedBasicImpact(targetCenter, layout, EMBER_GUARD_EMBER_BASH_KEY, EMBER_GUARD_EMBER_BASH_ANIMATION_KEY, 0.82, shouldFaceLeft);
     } else if (source.unitId === 'cinder-duelist') {
-      this.playGeneratedBasicImpact(targetCenter, layout, CINDER_DUELIST_FLAME_CLEAVE_KEY, CINDER_DUELIST_FLAME_CLEAVE_ANIMATION_KEY, 1.06);
+      this.playGeneratedBasicImpact(targetCenter, layout, CINDER_DUELIST_FLAME_CLEAVE_KEY, CINDER_DUELIST_FLAME_CLEAVE_ANIMATION_KEY, 1.06, shouldFaceLeft);
     } else if (source.unitId === 'shade-stalker') {
-      this.playGeneratedBasicImpact(targetCenter, layout, SHADE_STALKER_SHADE_SLASH_KEY, SHADE_STALKER_SHADE_SLASH_ANIMATION_KEY, 0.9);
+      this.playGeneratedBasicImpact(targetCenter, layout, SHADE_STALKER_SHADE_SLASH_KEY, SHADE_STALKER_SHADE_SLASH_ANIMATION_KEY, 0.9, shouldFaceLeft);
     } else if (source.unitId === 'ironwood-bulwark') {
-      this.playGeneratedBasicImpact(targetCenter, layout, IRONWOOD_BULWARK_ROOT_SMASH_KEY, IRONWOOD_BULWARK_ROOT_SMASH_ANIMATION_KEY, 0.92);
+      this.playGeneratedBasicImpact(targetCenter, layout, IRONWOOD_BULWARK_ROOT_SMASH_KEY, IRONWOOD_BULWARK_ROOT_SMASH_ANIMATION_KEY, 0.92, shouldFaceLeft);
     } else if (source.attackRange > 1 || distance > layout.tileSize * 1.5) {
       this.playProjectile(sourceCenter, targetCenter, amount, layout);
     } else {
@@ -994,10 +995,11 @@ export class BoardGrid {
     this.registerEffect(impact, 440);
   }
 
-  private playGeneratedBasicImpact(targetCenter: BoardPixelPosition, layout: BoardLayout, textureKey: string, animationKey: string, size: number) {
+  private playGeneratedBasicImpact(targetCenter: BoardPixelPosition, layout: BoardLayout, textureKey: string, animationKey: string, size: number, shouldFaceLeft: boolean) {
     const impact = this.scene.add
       .sprite(targetCenter.x, targetCenter.y - layout.tileSize * 0.04, textureKey, 0)
       .setScale((layout.tileSize * size) / 128)
+      .setFlipX(shouldFaceLeft)
       .setDepth(94)
       .play(animationKey);
     this.registerEffect(impact, 460);
