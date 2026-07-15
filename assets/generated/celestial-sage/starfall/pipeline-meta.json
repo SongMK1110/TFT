@@ -1,0 +1,19 @@
+{
+  "name": "celestial_sage_starfall",
+  "source": "C:\\workspace\\project2\\assets\\generated\\celestial-sage\\starfall\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.1961471,
+  "maxContentWidth": 571,
+  "maxContentHeight": 498,
+  "frames": [
+    { "index": 1, "x": 28, "y": 158, "w": 571, "h": 367 },
+    { "index": 2, "x": 27, "y": 85, "w": 571, "h": 440 },
+    { "index": 3, "x": 27, "y": 49, "w": 570, "h": 498 },
+    { "index": 4, "x": 30, "y": 195, "w": 560, "h": 323 }
+  ]
+}

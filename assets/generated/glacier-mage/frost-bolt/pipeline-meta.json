@@ -1,0 +1,19 @@
+{
+  "name": "glacier_mage_frost_bolt",
+  "source": "assets\\generated\\glacier-mage\\frost-bolt\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2516854,
+  "maxContentWidth": 445,
+  "maxContentHeight": 190,
+  "frames": [
+    { "index": 1, "x": 111, "y": 247, "w": 441, "h": 190 },
+    { "index": 2, "x": 80, "y": 248, "w": 444, "h": 189 },
+    { "index": 3, "x": 132, "y": 164, "w": 418, "h": 190 },
+    { "index": 4, "x": 77, "y": 165, "w": 445, "h": 190 }
+  ]
+}

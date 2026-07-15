@@ -1,0 +1,188 @@
+.panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.86);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.26);
+}
+
+.content {
+  display: grid;
+  align-content: start;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.unitCard {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  border-radius: 7px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(30, 41, 59, 0.72));
+}
+
+.unitCard > div:last-child {
+  min-width: 0;
+}
+
+.portrait {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 7px;
+  color: #0f172a;
+  background: #fbbf24;
+  font-weight: 900;
+}
+
+.unitCard strong,
+.skillBox strong {
+  display: block;
+  color: #f8fafc;
+  overflow-wrap: anywhere;
+}
+
+.unitCard span,
+.skillBox span,
+.skillBox p,
+.statGrid dt {
+  color: #94a3b8;
+}
+
+.sellButton {
+  width: 100%;
+  min-height: 32px;
+  margin-top: 8px;
+  border: 1px solid rgba(251, 191, 36, 0.34);
+  border-radius: 6px;
+  color: #fef3c7;
+  background: rgba(146, 64, 14, 0.36);
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sellButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.statGrid div {
+  padding: 8px;
+  border: 1px solid rgba(51, 65, 85, 0.9);
+  border-radius: 6px;
+  background: rgba(30, 41, 59, 0.56);
+}
+
+.statGrid dt,
+.statGrid dd {
+  margin: 0;
+}
+
+.statGrid dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.statGrid dd {
+  margin-top: 4px;
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+.skillBox {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 7px;
+  background: rgba(2, 6, 23, 0.45);
+}
+
+.skillBox p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.itemSection {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #f8fafc;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.sectionHeader span {
+  color: #7dd3fc;
+  font-size: 0.7rem;
+}
+
+.itemList {
+  display: grid;
+  gap: 6px;
+}
+
+.itemButton {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  min-height: 42px;
+  padding: 7px 8px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 6px;
+  color: inherit;
+  text-align: left;
+  background: rgba(30, 41, 59, 0.62);
+  cursor: pointer;
+}
+
+.itemButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.itemButton strong {
+  color: #f8fafc;
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.itemButton span,
+.emptyText {
+  color: #94a3b8;
+  font-size: 0.68rem;
+  line-height: 1.25;
+}
+
+.emptyText {
+  display: block;
+  padding: 7px 8px;
+  border: 1px dashed rgba(148, 163, 184, 0.25);
+  border-radius: 6px;
+}

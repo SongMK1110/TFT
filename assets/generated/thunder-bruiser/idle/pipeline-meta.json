@@ -1,0 +1,19 @@
+{
+  "name": "thunder_bruiser_idle",
+  "source": "C:\\workspace\\project2\\assets\\generated\\thunder-bruiser\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2178988,
+  "maxContentWidth": 444,
+  "maxContentHeight": 514,
+  "frames": [
+    { "index": 1, "x": 138, "y": 69, "w": 431, "h": 512 },
+    { "index": 2, "x": 55, "y": 74, "w": 444, "h": 507 },
+    { "index": 3, "x": 138, "y": 41, "w": 435, "h": 514 },
+    { "index": 4, "x": 63, "y": 44, "w": 434, "h": 511 }
+  ]
+}

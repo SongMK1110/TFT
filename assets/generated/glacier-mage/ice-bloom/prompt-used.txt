@@ -1,0 +1,1 @@
+2x2 Ice Bloom spell-impact sprite sheet for a tactical auto-battler. Frame sequence: frosted rune, rising crystal petals, a large luminous six-petaled ice flower peak, then fading splinters. Crisp blue-and-white pixel art, centered and contained in every cell, solid #FF00FF background.

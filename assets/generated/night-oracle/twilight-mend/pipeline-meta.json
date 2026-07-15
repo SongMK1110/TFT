@@ -1,0 +1,19 @@
+{
+  "name": "night_oracle_twilight_mend",
+  "source": "assets\\generated\\night-oracle\\twilight-mend\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2367865,
+  "maxContentWidth": 440,
+  "maxContentHeight": 473,
+  "frames": [
+    { "index": 1, "x": 182, "y": 339, "w": 289, "h": 175 },
+    { "index": 2, "x": 79, "y": 226, "w": 402, "h": 319 },
+    { "index": 3, "x": 112, "y": 41, "w": 440, "h": 473 },
+    { "index": 4, "x": 118, "y": 251, "w": 323, "h": 235 }
+  ]
+}

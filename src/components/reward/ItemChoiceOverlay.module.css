@@ -1,0 +1,94 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(2, 6, 23, 0.7);
+}
+
+.overlay {
+  display: grid;
+  gap: 18px;
+  width: min(760px, 100%);
+  padding: 22px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+}
+
+.header {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+
+.header span {
+  color: #7dd3fc;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.header strong {
+  color: #f8fafc;
+  font-size: 1.35rem;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.itemCard {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 10px;
+  min-height: 172px;
+  padding: 16px 12px;
+  border: 1px solid rgba(125, 211, 252, 0.24);
+  border-radius: 8px;
+  color: inherit;
+  text-align: center;
+  background: rgba(30, 41, 59, 0.72);
+  cursor: pointer;
+}
+
+.itemCard:hover {
+  border-color: rgba(251, 191, 36, 0.68);
+  background: rgba(51, 65, 85, 0.84);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  color: #0f172a;
+  background: #fbbf24;
+  font-weight: 900;
+}
+
+.itemCard strong {
+  color: #f8fafc;
+  font-size: 0.98rem;
+  overflow-wrap: anywhere;
+}
+
+.itemCard p {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+}

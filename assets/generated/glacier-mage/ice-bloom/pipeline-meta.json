@@ -1,0 +1,19 @@
+{
+  "name": "glacier_mage_ice_bloom",
+  "source": "assets\\generated\\glacier-mage\\ice-bloom\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.1992882,
+  "maxContentWidth": 562,
+  "maxContentHeight": 515,
+  "frames": [
+    { "index": 1, "x": 68, "y": 222, "w": 497, "h": 295 },
+    { "index": 2, "x": 28, "y": 78, "w": 534, "h": 474 },
+    { "index": 3, "x": 42, "y": 17, "w": 562, "h": 515 },
+    { "index": 4, "x": 29, "y": 158, "w": 523, "h": 338 }
+  ]
+}

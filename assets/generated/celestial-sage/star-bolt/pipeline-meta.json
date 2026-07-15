@@ -1,0 +1,19 @@
+{
+  "name": "celestial_sage_star_bolt",
+  "source": "C:\\workspace\\project2\\assets\\generated\\celestial-sage\\star-bolt\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.3943662,
+  "maxContentWidth": 284,
+  "maxContentHeight": 199,
+  "frames": [
+    { "index": 1, "x": 184, "y": 230, "w": 284, "h": 199 },
+    { "index": 2, "x": 139, "y": 244, "w": 281, "h": 185 },
+    { "index": 3, "x": 185, "y": 193, "w": 284, "h": 188 },
+    { "index": 4, "x": 138, "y": 219, "w": 216, "h": 164 }
+  ]
+}

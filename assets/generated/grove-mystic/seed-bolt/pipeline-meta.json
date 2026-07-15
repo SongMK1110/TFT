@@ -1,0 +1,19 @@
+{
+  "name": "grove_mystic_seed_bolt",
+  "source": "assets\\generated\\grove-mystic\\seed-bolt\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.4497992,
+  "maxContentWidth": 219,
+  "maxContentHeight": 249,
+  "frames": [
+    { "index": 1, "x": 242, "y": 213, "w": 219, "h": 249 },
+    { "index": 2, "x": 174, "y": 216, "w": 209, "h": 244 },
+    { "index": 3, "x": 243, "y": 194, "w": 213, "h": 235 },
+    { "index": 4, "x": 174, "y": 187, "w": 210, "h": 242 }
+  ]
+}

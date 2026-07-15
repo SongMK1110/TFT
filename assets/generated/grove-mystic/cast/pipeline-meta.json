@@ -1,0 +1,21 @@
+{
+  "name": "grove_mystic_cast",
+  "source": "assets\\generated\\grove-mystic\\cast\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 418,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2113208,
+  "maxContentWidth": 276,
+  "maxContentHeight": 530,
+  "frames": [
+    { "index": 1, "x": 167, "y": 167, "w": 229, "h": 397 },
+    { "index": 2, "x": 106, "y": 189, "w": 182, "h": 375 },
+    { "index": 3, "x": 0, "y": 35, "w": 188, "h": 530 },
+    { "index": 4, "x": 142, "y": 105, "w": 276, "h": 361 },
+    { "index": 5, "x": 83, "y": 83, "w": 235, "h": 380 },
+    { "index": 6, "x": 19, "y": 74, "w": 229, "h": 398 }
+  ]
+}

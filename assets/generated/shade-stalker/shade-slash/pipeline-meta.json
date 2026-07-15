@@ -1,0 +1,19 @@
+{
+  "name": "shade_stalker_shade_slash",
+  "source": "C:\\workspace\\project2\\assets\\generated\\shade-stalker\\shade-slash\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2978723,
+  "maxContentWidth": 354,
+  "maxContentHeight": 376,
+  "frames": [
+    { "index": 1, "x": 163, "y": 171, "w": 354, "h": 376 },
+    { "index": 2, "x": 154, "y": 186, "w": 320, "h": 368 },
+    { "index": 3, "x": 169, "y": 139, "w": 262, "h": 363 },
+    { "index": 4, "x": 235, "y": 286, "w": 93, "h": 153 }
+  ]
+}

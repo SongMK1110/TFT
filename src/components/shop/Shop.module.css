@@ -1,0 +1,166 @@
+.shopBar {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+  padding: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.86);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.26);
+}
+
+.shopHeader {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.shopActions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.tierOdds {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.tierOdd {
+  min-width: 0;
+  padding: 4px 2px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 4px;
+  background: rgba(15, 23, 42, 0.58);
+  font-size: 0.67rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tier1 { color: #cbd5e1; }
+.tier2 { color: #86efac; }
+.tier3 { color: #93c5fd; }
+.tier4 { color: #e9d5ff; }
+
+.actionButton,
+.buyButton {
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.actionButton {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  white-space: normal;
+}
+
+.shopGrid {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.shopCard {
+  display: grid;
+  grid-template-rows: 34px minmax(18px, auto) minmax(17px, auto) 30px;
+  gap: 6px;
+  min-height: 130px;
+  padding: 9px;
+  border: 2px solid var(--cost-color, rgba(51, 65, 85, 0.95));
+  border-radius: 7px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.82), rgba(15, 23, 42, 0.82));
+}
+
+.cost1 { --cost-color: #94a3b8; }
+.cost2 { --cost-color: #4ade80; }
+.cost3 { --cost-color: #60a5fa; }
+.cost5 { --cost-color: #d8b4fe; }
+
+.purchased {
+  opacity: 0.48;
+}
+
+.cardTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.portraitFrame {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  border: 1px solid var(--cost-color, #7dd3fc);
+  border-radius: 5px;
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.88);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.shopCard strong {
+  min-width: 0;
+  color: #f8fafc;
+  font-size: 0.84rem;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.costBadge {
+  color: #0f172a;
+  background: var(--cost-color, #fbbf24);
+  border-radius: 4px;
+  padding: 3px 5px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.shopCard small {
+  min-width: 0;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyButton {
+  align-self: end;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message {
+  min-height: 18px;
+  margin: 8px 0 0;
+  color: #fbbf24;
+  font-size: 0.78rem;
+  font-weight: 700;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ember_guardian_ember_shield",
+  "source": "assets\\generated\\ember-guardian\\ember-shield\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2209073,
+  "maxContentWidth": 507,
+  "maxContentHeight": 483,
+  "frames": [
+    { "index": 1, "x": 129, "y": 160, "w": 377, "h": 330 },
+    { "index": 2, "x": 48, "y": 130, "w": 462, "h": 401 },
+    { "index": 3, "x": 80, "y": 37, "w": 507, "h": 483 },
+    { "index": 4, "x": 61, "y": 80, "w": 456, "h": 413 }
+  ]
+}

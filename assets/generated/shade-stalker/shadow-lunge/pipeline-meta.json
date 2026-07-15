@@ -1,0 +1,19 @@
+{
+  "name": "shade_stalker_shadow_lunge",
+  "source": "assets\\generated\\shade-stalker\\shadow-lunge\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2209073,
+  "maxContentWidth": 507,
+  "maxContentHeight": 427,
+  "frames": [
+    { "index": 1, "x": 121, "y": 184, "w": 419, "h": 373 },
+    { "index": 2, "x": 23, "y": 203, "w": 507, "h": 322 },
+    { "index": 3, "x": 135, "y": 74, "w": 440, "h": 427 },
+    { "index": 4, "x": 81, "y": 104, "w": 243, "h": 382 }
+  ]
+}

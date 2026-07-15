@@ -1,0 +1,19 @@
+{
+  "name": "ironwood_bulwark_root_smash",
+  "source": "C:\\workspace\\project2\\assets\\generated\\ironwood-bulwark\\root-smash\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2003578,
+  "maxContentWidth": 559,
+  "maxContentHeight": 472,
+  "frames": [
+    { "index": 1, "x": 91, "y": 150, "w": 466, "h": 428 },
+    { "index": 2, "x": 11, "y": 124, "w": 559, "h": 472 },
+    { "index": 3, "x": 56, "y": 128, "w": 552, "h": 414 },
+    { "index": 4, "x": 95, "y": 183, "w": 387, "h": 324 }
+  ]
+}

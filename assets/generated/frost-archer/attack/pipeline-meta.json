@@ -1,0 +1,21 @@
+{
+  "name": "frost_archer_attack",
+  "source": "assets\\generated\\frost-archer\\attack\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 512,
+  "sourceCellHeight": 512,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2924282,
+  "maxContentWidth": 326,
+  "maxContentHeight": 383,
+  "frames": [
+    { "index": 1, "x": 156, "y": 99, "w": 307, "h": 362 },
+    { "index": 2, "x": 116, "y": 99, "w": 265, "h": 362 },
+    { "index": 3, "x": 47, "y": 100, "w": 326, "h": 366 },
+    { "index": 4, "x": 150, "y": 22, "w": 312, "h": 383 },
+    { "index": 5, "x": 118, "y": 51, "w": 292, "h": 360 },
+    { "index": 6, "x": 45, "y": 47, "w": 300, "h": 364 }
+  ]
+}

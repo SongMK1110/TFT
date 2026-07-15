@@ -1,0 +1,83 @@
+.phaserRoot {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.phaserRoot[data-dragging='true'] {
+  outline: 2px solid rgba(125, 211, 252, 0.5);
+  outline-offset: -2px;
+}
+
+.phaserRoot canvas {
+  display: block;
+}
+
+.dragPreview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 96px);
+  gap: 8px;
+  align-items: center;
+  width: 160px;
+  min-height: 62px;
+  padding: 7px;
+  border: 1px solid rgba(251, 191, 36, 0.78);
+  border-radius: 7px;
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42), 0 0 0 2px rgba(125, 211, 252, 0.2);
+  pointer-events: none;
+  user-select: none;
+}
+
+.dragPreviewArt {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border: 1px solid rgba(254, 243, 199, 0.24);
+  border-radius: 6px;
+  color: #f8fafc;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.28), transparent 44%),
+    rgba(30, 41, 59, 0.92);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.dragPreviewArt img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.45));
+}
+
+.dragPreviewText {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.dragPreviewText strong,
+.dragPreviewText span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dragPreviewText strong {
+  color: #f8fafc;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.dragPreviewText span {
+  color: #fde68a;
+  font-size: 0.66rem;
+  font-weight: 900;
+}

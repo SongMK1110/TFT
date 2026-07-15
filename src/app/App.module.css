@@ -1,0 +1,69 @@
+.appShell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100vh;
+  gap: 10px;
+  overflow: hidden;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(236, 72, 153, 0.15), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgba(14, 165, 233, 0.16), transparent 30%),
+    linear-gradient(180deg, #111827 0%, #070b12 100%);
+}
+
+.gameLayout {
+  display: grid;
+  grid-template-columns: 240px minmax(560px, 1fr) 320px;
+  gap: 10px;
+  min-height: 0;
+}
+
+.topStack {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.centerStack {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.rightStack {
+  display: grid;
+  grid-template-rows: minmax(220px, 0.85fr) minmax(260px, 1.15fr);
+  gap: 10px;
+  min-height: 0;
+}
+
+.battleStage {
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.86);
+  box-shadow: inset 0 0 0 1px rgba(125, 211, 252, 0.08), 0 18px 36px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 1100px) {
+  .appShell {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .gameLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .rightStack {
+    grid-template-rows: auto auto;
+  }
+
+  .battleStage {
+    min-height: 340px;
+  }
+}

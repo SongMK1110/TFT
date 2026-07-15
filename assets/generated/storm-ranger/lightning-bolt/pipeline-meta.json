@@ -1,0 +1,19 @@
+{
+  "name": "storm_ranger_lightning_bolt",
+  "source": "assets\\generated\\storm-ranger\\lightning-bolt\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.5090909,
+  "maxContentWidth": 165,
+  "maxContentHeight": 220,
+  "frames": [
+    { "index": 1, "x": 269, "y": 332, "w": 165, "h": 150 },
+    { "index": 2, "x": 193, "y": 330, "w": 156, "h": 159 },
+    { "index": 3, "x": 315, "y": 162, "w": 111, "h": 220 },
+    { "index": 4, "x": 184, "y": 190, "w": 161, "h": 156 }
+  ]
+}

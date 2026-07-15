@@ -1,0 +1,19 @@
+{
+  "name": "frost_archer_idle",
+  "source": "assets\\generated\\frost-archer\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2222222,
+  "maxContentWidth": 393,
+  "maxContentHeight": 504,
+  "frames": [
+    { "index": 1, "x": 180, "y": 87, "w": 365, "h": 499 },
+    { "index": 2, "x": 108, "y": 89, "w": 393, "h": 497 },
+    { "index": 3, "x": 162, "y": 44, "w": 384, "h": 504 },
+    { "index": 4, "x": 135, "y": 48, "w": 363, "h": 500 }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "thunder_bruiser_attack",
+  "source": "C:\\workspace\\project2\\assets\\generated\\thunder-bruiser\\attack\\source-generated.png",
+  "rows": 3,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 418,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2304527,
+  "maxContentWidth": 486,
+  "maxContentHeight": 362,
+  "frames": [
+    { "index": 1, "x": 200, "y": 51, "w": 325, "h": 362 },
+    { "index": 2, "x": 90, "y": 73, "w": 374, "h": 340 },
+    { "index": 3, "x": 174, "y": 45, "w": 417, "h": 330 },
+    { "index": 4, "x": 47, "y": 50, "w": 486, "h": 325 },
+    { "index": 5, "x": 181, "y": 0, "w": 348, "h": 346 },
+    { "index": 6, "x": 91, "y": 0, "w": 324, "h": 346 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "celestial_sage_idle",
+  "source": "C:\\workspace\\project2\\assets\\generated\\celestial-sage\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2058824,
+  "maxContentWidth": 383,
+  "maxContentHeight": 544,
+  "frames": [
+    { "index": 1, "x": 132, "y": 46, "w": 377, "h": 544 },
+    { "index": 2, "x": 126, "y": 47, "w": 383, "h": 543 },
+    { "index": 3, "x": 130, "y": 44, "w": 375, "h": 544 },
+    { "index": 4, "x": 135, "y": 44, "w": 356, "h": 544 }
+  ]
+}

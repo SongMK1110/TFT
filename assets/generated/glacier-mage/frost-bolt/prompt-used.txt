@@ -1,0 +1,1 @@
+2x2 Glacier Mage basic-attack projectile sprite sheet. A compact blue-white faceted ice bolt with a crystal core and short attached frost wisp, traveling right with subtle shimmer. High-detail pixel art, centered and contained in every cell, solid #FF00FF background.

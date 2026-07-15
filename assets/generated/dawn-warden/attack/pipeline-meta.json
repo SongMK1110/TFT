@@ -1,0 +1,21 @@
+{
+  "name": "dawn_warden_attack",
+  "source": "C:\\workspace\\project2\\assets\\generated\\dawn-warden\\attack\\source-generated.png",
+  "rows": 3,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 418,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2962963,
+  "maxContentWidth": 371,
+  "maxContentHeight": 378,
+  "frames": [
+    { "index": 1, "x": 164, "y": 38, "w": 356, "h": 378 },
+    { "index": 2, "x": 59, "y": 53, "w": 354, "h": 363 },
+    { "index": 3, "x": 170, "y": 37, "w": 371, "h": 315 },
+    { "index": 4, "x": 80, "y": 21, "w": 321, "h": 350 },
+    { "index": 5, "x": 180, "y": 0, "w": 313, "h": 345 },
+    { "index": 6, "x": 128, "y": 0, "w": 272, "h": 352 }
+  ]
+}

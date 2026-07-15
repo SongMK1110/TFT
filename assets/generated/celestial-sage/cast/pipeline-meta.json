@@ -1,0 +1,21 @@
+{
+  "name": "celestial_sage_cast",
+  "source": "C:\\workspace\\project2\\assets\\generated\\celestial-sage\\cast\\source-generated.png",
+  "rows": 3,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 418,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.28,
+  "maxContentWidth": 313,
+  "maxContentHeight": 400,
+  "frames": [
+    { "index": 1, "x": 238, "y": 42, "w": 209, "h": 364 },
+    { "index": 2, "x": 94, "y": 10, "w": 289, "h": 400 },
+    { "index": 3, "x": 225, "y": 41, "w": 223, "h": 326 },
+    { "index": 4, "x": 107, "y": 20, "w": 237, "h": 347 },
+    { "index": 5, "x": 175, "y": 0, "w": 313, "h": 331 },
+    { "index": 6, "x": 152, "y": 0, "w": 209, "h": 342 }
+  ]
+}

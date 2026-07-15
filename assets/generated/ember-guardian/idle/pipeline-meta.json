@@ -1,0 +1,19 @@
+{
+  "name": "ember_guardian_idle",
+  "source": "assets\\generated\\ember-guardian\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.246696,
+  "maxContentWidth": 394,
+  "maxContentHeight": 454,
+  "frames": [
+    { "index": 1, "x": 168, "y": 115, "w": 386, "h": 452 },
+    { "index": 2, "x": 133, "y": 115, "w": 387, "h": 452 },
+    { "index": 3, "x": 164, "y": 65, "w": 394, "h": 454 },
+    { "index": 4, "x": 136, "y": 68, "w": 387, "h": 453 }
+  ]
+}

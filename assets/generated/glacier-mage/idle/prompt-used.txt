@@ -1,0 +1,1 @@
+2x2 idle sprite sheet for Glacier Mage: a white-haired, short-bearded frost wizard in deep-navy and pale ice-blue fur-lined robes, crystal-tipped staff, 3/4 tactical battle view facing right. Subtle idle motion only, stable full-body scale and feet baseline, centered in every cell, solid #FF00FF background.

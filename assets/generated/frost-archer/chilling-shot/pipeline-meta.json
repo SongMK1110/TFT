@@ -1,0 +1,19 @@
+{
+  "name": "frost_archer_chilling_shot",
+  "source": "assets\\generated\\frost-archer\\chilling-shot\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2276423,
+  "maxContentWidth": 492,
+  "maxContentHeight": 132,
+  "frames": [
+    { "index": 1, "x": 62, "y": 252, "w": 492, "h": 132 },
+    { "index": 2, "x": 63, "y": 255, "w": 489, "h": 125 },
+    { "index": 3, "x": 65, "y": 229, "w": 488, "h": 127 },
+    { "index": 4, "x": 64, "y": 229, "w": 488, "h": 125 }
+  ]
+}

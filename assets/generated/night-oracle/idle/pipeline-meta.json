@@ -1,0 +1,19 @@
+{
+  "name": "night_oracle_idle",
+  "source": "assets\\generated\\night-oracle\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2338205,
+  "maxContentWidth": 324,
+  "maxContentHeight": 479,
+  "frames": [
+    { "index": 1, "x": 200, "y": 103, "w": 304, "h": 476 },
+    { "index": 2, "x": 119, "y": 105, "w": 308, "h": 474 },
+    { "index": 3, "x": 193, "y": 55, "w": 324, "h": 479 },
+    { "index": 4, "x": 123, "y": 61, "w": 302, "h": 473 }
+  ]
+}

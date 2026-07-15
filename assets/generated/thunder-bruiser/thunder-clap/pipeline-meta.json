@@ -1,0 +1,19 @@
+{
+  "name": "thunder_bruiser_thunder_clap",
+  "source": "C:\\workspace\\project2\\assets\\generated\\thunder-bruiser\\thunder-clap\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 768,
+  "sourceCellHeight": 512,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.1704718,
+  "maxContentWidth": 657,
+  "maxContentHeight": 461,
+  "frames": [
+    { "index": 1, "x": 72, "y": 29, "w": 645, "h": 461 },
+    { "index": 2, "x": 48, "y": 55, "w": 657, "h": 433 },
+    { "index": 3, "x": 73, "y": 19, "w": 638, "h": 444 },
+    { "index": 4, "x": 54, "y": 64, "w": 633, "h": 398 }
+  ]
+}

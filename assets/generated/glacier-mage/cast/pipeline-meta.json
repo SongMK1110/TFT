@@ -1,0 +1,21 @@
+{
+  "name": "glacier_mage_cast",
+  "source": "assets\\generated\\glacier-mage\\cast\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 512,
+  "sourceCellHeight": 512,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2731707,
+  "maxContentWidth": 353,
+  "maxContentHeight": 410,
+  "frames": [
+    { "index": 1, "x": 169, "y": 73, "w": 260, "h": 366 },
+    { "index": 2, "x": 140, "y": 101, "w": 253, "h": 338 },
+    { "index": 3, "x": 98, "y": 43, "w": 252, "h": 402 },
+    { "index": 4, "x": 152, "y": 0, "w": 272, "h": 410 },
+    { "index": 5, "x": 102, "y": 21, "w": 353, "h": 389 },
+    { "index": 6, "x": 116, "y": 43, "w": 259, "h": 367 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ironwood_bulwark_rooted_roar",
+  "source": "assets\\generated\\ironwood-bulwark\\rooted-roar\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2545455,
+  "maxContentWidth": 414,
+  "maxContentHeight": 440,
+  "frames": [
+    { "index": 1, "x": 126, "y": 332, "w": 391, "h": 214 },
+    { "index": 2, "x": 79, "y": 125, "w": 406, "h": 431 },
+    { "index": 3, "x": 126, "y": 63, "w": 414, "h": 440 },
+    { "index": 4, "x": 79, "y": 326, "w": 393, "h": 175 }
+  ]
+}

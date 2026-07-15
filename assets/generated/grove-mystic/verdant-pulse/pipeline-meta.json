@@ -1,0 +1,19 @@
+{
+  "name": "grove_mystic_verdant_pulse",
+  "source": "assets\\generated\\grove-mystic\\verdant-pulse\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2166344,
+  "maxContentWidth": 517,
+  "maxContentHeight": 457,
+  "frames": [
+    { "index": 1, "x": 197, "y": 266, "w": 238, "h": 173 },
+    { "index": 2, "x": 32, "y": 199, "w": 517, "h": 328 },
+    { "index": 3, "x": 91, "y": 38, "w": 472, "h": 457 },
+    { "index": 4, "x": 136, "y": 214, "w": 316, "h": 225 }
+  ]
+}

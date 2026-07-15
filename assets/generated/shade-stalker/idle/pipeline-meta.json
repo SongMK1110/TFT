@@ -1,0 +1,19 @@
+{
+  "name": "shade_stalker_idle",
+  "source": "assets\\generated\\shade-stalker\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2557078,
+  "maxContentWidth": 438,
+  "maxContentHeight": 438,
+  "frames": [
+    { "index": 1, "x": 139, "y": 112, "w": 421, "h": 433 },
+    { "index": 2, "x": 96, "y": 113, "w": 405, "h": 438 },
+    { "index": 3, "x": 122, "y": 88, "w": 438, "h": 410 },
+    { "index": 4, "x": 85, "y": 72, "w": 416, "h": 426 }
+  ]
+}

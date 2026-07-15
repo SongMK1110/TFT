@@ -1,0 +1,19 @@
+{
+  "name": "ember_guardian_ember_bash",
+  "source": "C:\\workspace\\project2\\assets\\generated\\ember-guardian\\ember-bash\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2362869,
+  "maxContentWidth": 446,
+  "maxContentHeight": 474,
+  "frames": [
+    { "index": 1, "x": 170, "y": 157, "w": 283, "h": 343 },
+    { "index": 2, "x": 49, "y": 82, "w": 446, "h": 474 },
+    { "index": 3, "x": 148, "y": 57, "w": 399, "h": 392 },
+    { "index": 4, "x": 41, "y": 93, "w": 226, "h": 344 }
+  ]
+}

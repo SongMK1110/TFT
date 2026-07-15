@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 28px;
+  margin-bottom: 8px;
+  color: #f8fafc;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.header small {
+  color: #7dd3fc;
+  font-size: 0.72rem;
+  font-weight: 700;
+}

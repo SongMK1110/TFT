@@ -1,0 +1,19 @@
+{
+  "name": "cinder_duelist_idle",
+  "source": "assets\\generated\\cinder-duelist\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2129278,
+  "maxContentWidth": 519,
+  "maxContentHeight": 526,
+  "frames": [
+    { "index": 1, "x": 108, "y": 103, "w": 496, "h": 469 },
+    { "index": 2, "x": 85, "y": 46, "w": 470, "h": 526 },
+    { "index": 3, "x": 108, "y": 78, "w": 519, "h": 469 },
+    { "index": 4, "x": 81, "y": 24, "w": 485, "h": 523 }
+  ]
+}

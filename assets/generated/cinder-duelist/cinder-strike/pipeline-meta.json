@@ -1,0 +1,19 @@
+{
+  "name": "cinder_duelist_cinder_strike",
+  "source": "assets\\generated\\cinder-duelist\\cinder-strike\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2338205,
+  "maxContentWidth": 479,
+  "maxContentHeight": 457,
+  "frames": [
+    { "index": 1, "x": 173, "y": 170, "w": 319, "h": 297 },
+    { "index": 2, "x": 66, "y": 191, "w": 447, "h": 251 },
+    { "index": 3, "x": 117, "y": 32, "w": 479, "h": 457 },
+    { "index": 4, "x": 62, "y": 94, "w": 433, "h": 362 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "storm_ranger_rapid_gale",
+  "source": "assets\\generated\\storm-ranger\\rapid-gale\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2939633,
+  "maxContentWidth": 381,
+  "maxContentHeight": 263,
+  "frames": [
+    { "index": 1, "x": 195, "y": 322, "w": 262, "h": 132 },
+    { "index": 2, "x": 98, "y": 257, "w": 381, "h": 244 },
+    { "index": 3, "x": 174, "y": 138, "w": 341, "h": 263 },
+    { "index": 4, "x": 162, "y": 353, "w": 129, "h": 50 }
+  ]
+}

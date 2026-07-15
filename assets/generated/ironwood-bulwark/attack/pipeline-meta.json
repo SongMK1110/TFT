@@ -1,0 +1,21 @@
+{
+  "name": "ironwood_bulwark_attack",
+  "source": "assets\\generated\\ironwood-bulwark\\attack\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 418,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2924282,
+  "maxContentWidth": 334,
+  "maxContentHeight": 383,
+  "frames": [
+    { "index": 1, "x": 43, "y": 123, "w": 334, "h": 383 },
+    { "index": 2, "x": 50, "y": 139, "w": 329, "h": 379 },
+    { "index": 3, "x": 24, "y": 154, "w": 325, "h": 352 },
+    { "index": 4, "x": 76, "y": 56, "w": 328, "h": 371 },
+    { "index": 5, "x": 35, "y": 46, "w": 327, "h": 380 },
+    { "index": 6, "x": 1, "y": 44, "w": 333, "h": 382 }
+  ]
+}

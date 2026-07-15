@@ -1,0 +1,19 @@
+{
+  "name": "thunder_bruiser_thunder_punch",
+  "source": "C:\\workspace\\project2\\assets\\generated\\thunder-bruiser\\thunder-punch\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2666667,
+  "maxContentWidth": 420,
+  "maxContentHeight": 410,
+  "frames": [
+    { "index": 1, "x": 161, "y": 157, "w": 331, "h": 296 },
+    { "index": 2, "x": 71, "y": 100, "w": 420, "h": 410 },
+    { "index": 3, "x": 142, "y": 83, "w": 399, "h": 346 },
+    { "index": 4, "x": 232, "y": 218, "w": 126, "h": 116 }
+  ]
+}

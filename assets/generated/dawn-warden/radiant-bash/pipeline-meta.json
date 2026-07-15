@@ -1,0 +1,19 @@
+{
+  "name": "dawn_warden_radiant_bash",
+  "source": "C:\\workspace\\project2\\assets\\generated\\dawn-warden\\radiant-bash\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2654029,
+  "maxContentWidth": 403,
+  "maxContentHeight": 422,
+  "frames": [
+    { "index": 1, "x": 206, "y": 176, "w": 243, "h": 279 },
+    { "index": 2, "x": 49, "y": 120, "w": 403, "h": 388 },
+    { "index": 3, "x": 125, "y": 54, "w": 396, "h": 422 },
+    { "index": 4, "x": 254, "y": 459, "w": 20, "h": 26 }
+  ]
+}

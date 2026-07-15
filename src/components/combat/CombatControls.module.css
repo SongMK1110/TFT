@@ -1,0 +1,44 @@
+.combatControls {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 46px;
+  padding: 8px 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+}
+
+.summary {
+  display: grid;
+  gap: 2px;
+}
+
+.summary strong {
+  color: #f8fafc;
+  font-size: 0.86rem;
+}
+
+.summary span {
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.primaryButton {
+  min-width: 104px;
+  min-height: 30px;
+  border-color: rgba(251, 191, 36, 0.48);
+  color: #111827;
+  background: #fbbf24;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.primaryButton:disabled {
+  cursor: not-allowed;
+  color: #94a3b8;
+  background: rgba(51, 65, 85, 0.9);
+}

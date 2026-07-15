@@ -1,0 +1,19 @@
+{
+  "name": "storm_ranger_idle",
+  "source": "assets\\generated\\storm-ranger\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2580645,
+  "maxContentWidth": 434,
+  "maxContentHeight": 427,
+  "frames": [
+    { "index": 1, "x": 151, "y": 123, "w": 370, "h": 414 },
+    { "index": 2, "x": 71, "y": 130, "w": 419, "h": 399 },
+    { "index": 3, "x": 114, "y": 109, "w": 434, "h": 349 },
+    { "index": 4, "x": 80, "y": 60, "w": 328, "h": 427 }
+  ]
+}

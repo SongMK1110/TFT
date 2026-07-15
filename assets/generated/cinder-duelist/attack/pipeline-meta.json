@@ -1,0 +1,21 @@
+{
+  "name": "cinder_duelist_attack",
+  "source": "assets\\generated\\cinder-duelist\\attack\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 512,
+  "sourceCellHeight": 512,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.246696,
+  "maxContentWidth": 454,
+  "maxContentHeight": 394,
+  "frames": [
+    { "index": 1, "x": 124, "y": 61, "w": 364, "h": 369 },
+    { "index": 2, "x": 72, "y": 37, "w": 297, "h": 394 },
+    { "index": 3, "x": 0, "y": 106, "w": 454, "h": 327 },
+    { "index": 4, "x": 115, "y": 48, "w": 395, "h": 354 },
+    { "index": 5, "x": 55, "y": 1, "w": 339, "h": 387 },
+    { "index": 6, "x": 20, "y": 22, "w": 367, "h": 367 }
+  ]
+}

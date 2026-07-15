@@ -1,0 +1,21 @@
+{
+  "name": "shade_stalker_attack",
+  "source": "assets\\generated\\shade-stalker\\attack\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 341,
+  "sourceCellHeight": 768,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.3027027,
+  "maxContentWidth": 298,
+  "maxContentHeight": 370,
+  "frames": [
+    { "index": 1, "x": 89, "y": 98, "w": 252, "h": 370 },
+    { "index": 2, "x": 225, "y": 217, "w": 116, "h": 251 },
+    { "index": 3, "x": 0, "y": 109, "w": 298, "h": 324 },
+    { "index": 4, "x": 116, "y": 307, "w": 225, "h": 355 },
+    { "index": 5, "x": 220, "y": 359, "w": 121, "h": 312 },
+    { "index": 6, "x": 0, "y": 299, "w": 205, "h": 360 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "dawn_warden_radiant_aegis",
+  "source": "C:\\workspace\\project2\\assets\\generated\\dawn-warden\\radiant-aegis\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.224,
+  "maxContentWidth": 500,
+  "maxContentHeight": 478,
+  "frames": [
+    { "index": 1, "x": 81, "y": 224, "w": 474, "h": 318 },
+    { "index": 2, "x": 67, "y": 105, "w": 478, "h": 438 },
+    { "index": 3, "x": 72, "y": 45, "w": 500, "h": 478 },
+    { "index": 4, "x": 72, "y": 85, "w": 466, "h": 437 }
+  ]
+}

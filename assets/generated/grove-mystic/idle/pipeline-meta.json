@@ -1,0 +1,19 @@
+{
+  "name": "grove_mystic_idle",
+  "source": "assets\\generated\\grove-mystic\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2429501,
+  "maxContentWidth": 331,
+  "maxContentHeight": 461,
+  "frames": [
+    { "index": 1, "x": 205, "y": 114, "w": 305, "h": 458 },
+    { "index": 2, "x": 140, "y": 116, "w": 316, "h": 456 },
+    { "index": 3, "x": 209, "y": 76, "w": 331, "h": 444 },
+    { "index": 4, "x": 136, "y": 59, "w": 312, "h": 461 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "glacier_mage_idle",
+  "source": "assets\\generated\\glacier-mage\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2450766,
+  "maxContentWidth": 384,
+  "maxContentHeight": 457,
+  "frames": [
+    { "index": 1, "x": 144, "y": 103, "w": 351, "h": 457 },
+    { "index": 2, "x": 96, "y": 107, "w": 360, "h": 456 },
+    { "index": 3, "x": 115, "y": 64, "w": 384, "h": 453 },
+    { "index": 4, "x": 105, "y": 69, "w": 347, "h": 450 }
+  ]
+}

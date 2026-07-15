@@ -1,0 +1,19 @@
+{
+  "name": "cinder_duelist_flame_cleave",
+  "source": "C:\\workspace\\project2\\assets\\generated\\cinder-duelist\\flame-cleave\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2511211,
+  "maxContentWidth": 446,
+  "maxContentHeight": 431,
+  "frames": [
+    { "index": 1, "x": 84, "y": 111, "w": 401, "h": 431 },
+    { "index": 2, "x": 46, "y": 122, "w": 446, "h": 422 },
+    { "index": 3, "x": 55, "y": 110, "w": 434, "h": 399 },
+    { "index": 4, "x": 48, "y": 144, "w": 349, "h": 351 }
+  ]
+}

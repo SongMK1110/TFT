@@ -1,0 +1,21 @@
+{
+  "name": "ember_guardian_attack",
+  "source": "assets\\generated\\ember-guardian\\attack\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 512,
+  "sourceCellHeight": 512,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2828283,
+  "maxContentWidth": 396,
+  "maxContentHeight": 299,
+  "frames": [
+    { "index": 1, "x": 189, "y": 133, "w": 287, "h": 299 },
+    { "index": 2, "x": 119, "y": 138, "w": 219, "h": 294 },
+    { "index": 3, "x": 32, "y": 155, "w": 396, "h": 277 },
+    { "index": 4, "x": 128, "y": 58, "w": 384, "h": 294 },
+    { "index": 5, "x": 135, "y": 57, "w": 264, "h": 295 },
+    { "index": 6, "x": 75, "y": 57, "w": 286, "h": 295 }
+  ]
+}

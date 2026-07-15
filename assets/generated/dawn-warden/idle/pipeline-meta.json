@@ -1,0 +1,19 @@
+{
+  "name": "dawn_warden_idle",
+  "source": "C:\\workspace\\project2\\assets\\generated\\dawn-warden\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2276423,
+  "maxContentWidth": 445,
+  "maxContentHeight": 492,
+  "frames": [
+    { "index": 1, "x": 138, "y": 54, "w": 382, "h": 490 },
+    { "index": 2, "x": 94, "y": 55, "w": 379, "h": 492 },
+    { "index": 3, "x": 45, "y": 42, "w": 445, "h": 490 },
+    { "index": 4, "x": 94, "y": 43, "w": 389, "h": 490 }
+  ]
+}

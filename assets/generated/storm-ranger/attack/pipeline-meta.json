@@ -1,0 +1,21 @@
+{
+  "name": "storm_ranger_attack",
+  "source": "assets\\generated\\storm-ranger\\attack\\source-generated.png",
+  "rows": 2,
+  "cols": 3,
+  "sourceCellWidth": 512,
+  "sourceCellHeight": 512,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2807018,
+  "maxContentWidth": 399,
+  "maxContentHeight": 391,
+  "frames": [
+    { "index": 1, "x": 117, "y": 65, "w": 344, "h": 391 },
+    { "index": 2, "x": 63, "y": 70, "w": 320, "h": 369 },
+    { "index": 3, "x": 7, "y": 86, "w": 381, "h": 362 },
+    { "index": 4, "x": 113, "y": 54, "w": 399, "h": 367 },
+    { "index": 5, "x": 65, "y": 52, "w": 343, "h": 366 },
+    { "index": 6, "x": 0, "y": 50, "w": 336, "h": 381 }
+  ]
+}

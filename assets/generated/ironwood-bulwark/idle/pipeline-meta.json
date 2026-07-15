@@ -1,0 +1,19 @@
+{
+  "name": "ironwood_bulwark_idle",
+  "source": "assets\\generated\\ironwood-bulwark\\idle\\source-generated.png",
+  "rows": 2,
+  "cols": 2,
+  "sourceCellWidth": 627,
+  "sourceCellHeight": 627,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.2253521,
+  "maxContentWidth": 461,
+  "maxContentHeight": 497,
+  "frames": [
+    { "index": 1, "x": 98, "y": 79, "w": 451, "h": 497 },
+    { "index": 2, "x": 67, "y": 82, "w": 452, "h": 494 },
+    { "index": 3, "x": 97, "y": 53, "w": 461, "h": 493 },
+    { "index": 4, "x": 66, "y": 53, "w": 453, "h": 496 }
+  ]
+}
