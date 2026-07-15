@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import {
-  areSameBoardPosition,
   boardToPhaserPosition,
   canMoveUnitToBoardPosition,
   canPlaceUnitOnBoard,
@@ -127,10 +126,8 @@ const SPARK_COLOR = 0xfbbf24;
 const MAGIC_SPARK_COLOR = 0x7dd3fc;
 const EMBER_CORE_COLOR = 0xf97316;
 const EMBER_GLOW_COLOR = 0xfacc15;
-const EMBER_DARK_COLOR = 0x7c2d12;
 const CINDER_BLADE_COLOR = 0xfb923c;
 const CINDER_FLASH_COLOR = 0xffedd5;
-const CINDER_SMOKE_COLOR = 0x450a0a;
 const FROST_ARROW_COLOR = 0x7dd3fc;
 const FROST_CORE_COLOR = 0xe0f2fe;
 const FROST_RING_COLOR = 0x38bdf8;
@@ -1021,10 +1018,6 @@ export class BoardGrid {
     const sourceCenter = boardToPhaserPosition(source.position, layout);
     const targetCenter = boardToPhaserPosition(target.position, layout);
     const angle = Phaser.Math.Angle.Between(sourceCenter.x, sourceCenter.y, targetCenter.x, targetCenter.y);
-    const midpoint = {
-      x: (sourceCenter.x + targetCenter.x) / 2,
-      y: (sourceCenter.y + targetCenter.y) / 2,
-    };
 
     if (sourceView) {
       this.playUnitAttackAnimation(sourceView, targetCenter.x < sourceCenter.x);
@@ -1047,65 +1040,6 @@ export class BoardGrid {
 
     this.registerEffect(cinderStrike, 520);
     this.scene.cameras.main.shake(SCREEN_SHAKE_MS, SCREEN_SHAKE_INTENSITY * 1.2);
-    return;
-
-    const firstSlash = this.scene.add
-      .rectangle(midpoint.x, midpoint.y, layout.tileSize * 0.68, 6, CINDER_FLASH_COLOR, 0.92)
-      .setRotation(angle - 0.48)
-      .setDepth(90);
-    const secondSlash = this.scene.add
-      .rectangle(midpoint.x, midpoint.y, layout.tileSize * 0.6, 5, CINDER_BLADE_COLOR, 0.88)
-      .setRotation(angle + 0.48)
-      .setDepth(91);
-    const emberLine = this.scene.add
-      .rectangle(midpoint.x, midpoint.y, layout.tileSize * 0.78, 3, EMBER_CORE_COLOR, 0.72)
-      .setRotation(angle)
-      .setDepth(89);
-
-    this.registerEffect(firstSlash, SLASH_TWEEN_MS + 120);
-    this.registerEffect(secondSlash, SLASH_TWEEN_MS + 120);
-    this.registerEffect(emberLine, SLASH_TWEEN_MS + 120);
-    this.playCinderAfterimages(sourceCenter, targetCenter, layout);
-
-    for (const slash of [firstSlash, secondSlash, emberLine]) {
-      this.scene.tweens.add({
-        targets: slash,
-        alpha: 0,
-        scaleX: 1.75,
-        scaleY: 0.25,
-        duration: SLASH_TWEEN_MS + 70,
-        ease: 'Cubic.easeOut',
-        onComplete: () => slash.destroy(),
-      });
-    }
-  }
-
-  private playCinderAfterimages(sourceCenter: BoardPixelPosition, targetCenter: BoardPixelPosition, layout: BoardLayout) {
-    for (let index = 1; index <= 3; index += 1) {
-      const ratio = index / 4;
-      const afterimage = this.scene.add
-        .ellipse(
-          Phaser.Math.Linear(sourceCenter.x, targetCenter.x, ratio),
-          Phaser.Math.Linear(sourceCenter.y, targetCenter.y, ratio),
-          layout.tileSize * 0.18,
-          layout.tileSize * 0.1,
-          CINDER_SMOKE_COLOR,
-          0.34,
-        )
-        .setDepth(84);
-
-      this.registerEffect(afterimage, SLASH_TWEEN_MS + 160);
-      this.scene.tweens.add({
-        targets: afterimage,
-        alpha: 0,
-        scaleX: 1.8,
-        scaleY: 0.35,
-        delay: index * 22,
-        duration: SLASH_TWEEN_MS + 80,
-        ease: 'Cubic.easeOut',
-        onComplete: () => afterimage.destroy(),
-      });
-    }
   }
 
   private playCinderDuelistHitEffect(target: CombatUnit, layout: BoardLayout) {
