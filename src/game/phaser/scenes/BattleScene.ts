@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import twilightSanctumBoardUrl from '../../../../assets/generated/maps/twilight-sanctum/twilight-sanctum-board.png';
 import { BoardGrid, type BoardGridRenderState } from '../objects/BoardGrid';
+import { preloadItemIcons } from '../objects/ItemSprite';
 import { createUnitSpriteAnimations, preloadUnitSprites } from '../objects/UnitSprite';
 import { useGameStore } from '../../../store/useGameStore';
 import type { CombatEvent } from '../../../types/combat';
@@ -20,6 +21,7 @@ export class BattleScene extends Phaser.Scene {
 
   preload() {
     this.load.image('map-twilight-sanctum', twilightSanctumBoardUrl);
+    preloadItemIcons(this);
     preloadUnitSprites(this);
   }
 

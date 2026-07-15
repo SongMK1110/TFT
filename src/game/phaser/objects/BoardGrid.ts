@@ -85,6 +85,7 @@ import {
   getUnitSpriteSpec,
   type UnitSpriteSpec,
 } from './UnitSprite';
+import { getItemIconKey } from './ItemSprite';
 
 type BoardTileView = {
   slot: BoardSlot;
@@ -327,6 +328,8 @@ export class BoardGrid {
       container.add([token, initials, starLabel]);
     }
 
+    this.addItemIcons(container, unit.items, radius, layout.tileSize);
+
     if (isCombatUnit && previousCenter && (previousCenter.x !== center.x || previousCenter.y !== center.y)) {
       this.scene.tweens.add({
         targets: container,
@@ -396,6 +399,36 @@ export class BoardGrid {
     }
 
     return container;
+  }
+
+  private addItemIcons(
+    container: Phaser.GameObjects.Container,
+    items: BoardUnit['items'],
+    radius: number,
+    tileSize: number,
+  ) {
+    const displayedItems = items.slice(0, 3);
+
+    if (displayedItems.length === 0) {
+      return;
+    }
+
+    const iconSize = Math.max(13, Math.min(20, tileSize * 0.16));
+    const badgeSize = iconSize + 4;
+    const gap = Math.max(2, iconSize * 0.12);
+    const totalWidth = displayedItems.length * badgeSize + (displayedItems.length - 1) * gap;
+    const startX = -totalWidth / 2 + badgeSize / 2;
+    const y = radius * 0.52;
+
+    displayedItems.forEach((item, index) => {
+      const x = startX + index * (badgeSize + gap);
+      const badge = this.scene.add
+        .rectangle(x, y, badgeSize, badgeSize, 0x020617, 0.82)
+        .setStrokeStyle(1, 0xfbbf24, 0.8);
+      const icon = this.scene.add.image(x, y, getItemIconKey(item.id)).setDisplaySize(iconSize, iconSize);
+
+      container.add([badge, icon]);
+    });
   }
 
   private renderUnits(boardUnits: Array<BoardUnit | CombatUnit>, layout: BoardLayout) {
