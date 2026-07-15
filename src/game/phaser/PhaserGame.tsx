@@ -65,6 +65,11 @@ export function PhaserGame() {
         return;
       }
 
+      // Board units are dropped by BoardGrid's Phaser drag handler.
+      if (state.dragState.source.kind === 'board') {
+        return;
+      }
+
       const battleScene = gameRef.current?.scene.getScene('BattleScene');
       const canvas = gameRef.current?.canvas;
       const rect = canvas?.getBoundingClientRect() ?? container.getBoundingClientRect();
