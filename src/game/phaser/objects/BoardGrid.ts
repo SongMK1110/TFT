@@ -16,7 +16,8 @@ import type {
   BoardSlot,
 } from '../../../types/board';
 import type { CombatEvent, CombatResult, CombatUnit } from '../../../types/combat';
-import type { BoardUnit, GamePhase, UnitDragState } from '../../../types/game';
+import type { BoardUnit, DragState, GamePhase } from '../../../types/game';
+import { MAX_ITEMS_PER_UNIT } from '../../../types/unit';
 import {
   BASIC_ATTACK_TWEEN_MS,
   DEATH_FADE_TWEEN_MS,
@@ -105,7 +106,7 @@ export type BoardGridRenderState = {
   boardUnits: BoardUnit[];
   combatUnits?: CombatUnit[];
   combatEvents?: CombatEvent[];
-  dragState?: UnitDragState;
+  dragState?: DragState;
   level: number;
   phase: GamePhase;
 };
@@ -258,6 +259,12 @@ export class BoardGrid {
     return this.layout ? phaserToBoardPosition(point, this.layout) : undefined;
   }
 
+  getBoardUnitInstanceIdAt(position: BoardPosition): string | undefined {
+    return this.renderState.boardUnits.find(
+      (unit) => unit.position.row === position.row && unit.position.col === position.col,
+    )?.instanceId;
+  }
+
   private createTileView(slot: BoardSlot, tileSize: number, center: BoardPixelPosition): BoardTileView {
     const tile = this.scene.add
       .rectangle(center.x, center.y, tileSize, tileSize, this.getTileFillColor(slot), 0.08)
@@ -329,6 +336,14 @@ export class BoardGrid {
     }
 
     this.addItemIcons(container, unit.items, radius, layout.tileSize);
+
+    if (!isCombatUnit && this.renderState.dragState?.source.kind === 'item' && unit.items.length < MAX_ITEMS_PER_UNIT) {
+      const itemTarget = this.scene.add
+        .ellipse(0, 0, size * 0.92, size * 0.92, 0x38bdf8, 0.08)
+        .setStrokeStyle(2, 0x7dd3fc, 0.9);
+
+      container.add(itemTarget);
+    }
 
     if (isCombatUnit && previousCenter && (previousCenter.x !== center.x || previousCenter.y !== center.y)) {
       this.scene.tweens.add({
@@ -2207,7 +2222,8 @@ export class BoardGrid {
 
   private applyTileState(tileView: BoardTileView, renderState: BoardGridRenderState) {
     const { boardUnits, dragState, level, phase } = renderState;
-    const placementState = this.getPlacementVisualState(tileView.slot, boardUnits, level, dragState?.source.instanceId);
+    const draggingInstanceId = dragState?.source.kind === 'item' ? undefined : dragState?.source.instanceId;
+    const placementState = this.getPlacementVisualState(tileView.slot, boardUnits, level, draggingInstanceId);
     const strokeColor = placementState
       ? placementState === 'placeable'
         ? PLACEABLE_STROKE_COLOR
@@ -2232,6 +2248,10 @@ export class BoardGrid {
     const { dragState } = this.renderState;
 
     if (!dragState) {
+      return undefined;
+    }
+
+    if (dragState.source.kind === 'item') {
       return undefined;
     }
 

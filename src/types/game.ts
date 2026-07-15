@@ -71,6 +71,16 @@ export type UnitDragState = {
   unit: PlayerUnit;
 };
 
+export type ItemDragState = {
+  source: {
+    kind: 'item';
+    itemId: Item['id'];
+  };
+  item: Item;
+};
+
+export type DragState = UnitDragState | ItemDragState;
+
 export type PlacementActionResult = {
   success: boolean;
   message: string;

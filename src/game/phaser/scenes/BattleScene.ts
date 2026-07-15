@@ -46,8 +46,7 @@ export class BattleScene extends Phaser.Scene {
     this.renderBoard();
     this.syncBgm(useGameStore.getState().phase);
     this.unsubscribeStore = useGameStore.subscribe((state, previousState) => {
-      const shouldRefreshDragHighlight =
-        state.dragState?.source.kind === 'bench' || previousState.dragState?.source.kind === 'bench';
+      const shouldRefreshDragHighlight = state.dragState !== previousState.dragState;
 
       if (state.phase !== previousState.phase) {
         this.syncBgm(state.phase);
@@ -77,6 +76,10 @@ export class BattleScene extends Phaser.Scene {
 
   getBoardPositionAt(point: BoardPixelPosition): BoardPosition | undefined {
     return this.boardGrid?.getBoardPositionAt(point);
+  }
+
+  getBoardUnitInstanceIdAt(position: BoardPosition): string | undefined {
+    return this.boardGrid?.getBoardUnitInstanceIdAt(position);
   }
 
   private renderBoard() {

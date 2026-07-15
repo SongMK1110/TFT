@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { units } from '../data/units';
-import { items, starterItemIds } from '../data/items';
+import { getItemById, items, starterItemIds } from '../data/items';
 import { enemies } from '../data/enemies';
 import { synergies } from '../data/synergies';
 import { createCombatState, resetCombatHp, stepCombat } from '../game/core/combat/combatEngine';
@@ -58,7 +58,7 @@ import {
   type ShopUnitOffer,
   type ActiveSynergy,
   type SynergyState,
-  type UnitDragState,
+  type DragState,
 } from '../types/game';
 import type { CombatState } from '../types/combat';
 import type { Item, PendingItemChoice } from '../types/item';
@@ -82,7 +82,7 @@ type GameState = {
   activeSynergies: ActiveSynergy[];
   selectedUnitInstanceId?: string;
   combatState?: CombatState;
-  dragState?: UnitDragState;
+  dragState?: DragState;
   isShopLocked: boolean;
   battleResult?: BattleResult;
   message?: string;
@@ -101,6 +101,7 @@ type GameState = {
   canBuyOffer: (offerId: string) => boolean;
   startBenchDrag: (benchIndex: number) => PlacementActionResult;
   startBoardDrag: (instanceId: string) => PlacementActionResult;
+  startItemDrag: (itemId: Item['id']) => ShopActionResult;
   clearDragState: () => void;
   placeBenchUnitOnBoard: (benchIndex: number, position: BoardPosition) => PlacementActionResult;
   moveBoardUnit: (instanceId: string, position: BoardPosition) => PlacementActionResult;
@@ -485,6 +486,27 @@ export const useGameStore = create<GameState>((set, get) => ({
     });
 
     return { success: true, message: '유닛을 드래그하고 있습니다.' };
+  },
+  startItemDrag: (itemId) => {
+    const state = get();
+
+    if (isPlacementLocked(state.phase)) {
+      const result = { success: false, message: '전투 중에는 아이템을 장착할 수 없습니다.' };
+      set({ message: result.message });
+      return result;
+    }
+
+    const item = getItemById(itemId);
+
+    if (!item || !state.playerItems.includes(itemId)) {
+      const result = { success: false, message: '보유한 아이템을 찾을 수 없습니다.' };
+      set({ message: result.message });
+      return result;
+    }
+
+    set({ dragState: { source: { kind: 'item', itemId }, item }, message: undefined });
+
+    return { success: true, message: `${item.name}을 드래그하고 있습니다.` };
   },
   clearDragState: () => set({ dragState: undefined }),
   placeBenchUnitOnBoard: (benchIndex, position) => {

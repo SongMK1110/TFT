@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Phaser from 'phaser';
+import { itemIconUrls } from '../../assets/itemIcons';
 import cinderDuelistPortraitUrl from '../../../assets/generated/cinder-duelist/idle/frames/cinder_duelist_idle_01.png';
 import celestialSagePortraitUrl from '../../../assets/generated/celestial-sage/idle/frames/celestial_sage_idle_01.png';
 import dawnWardenPortraitUrl from '../../../assets/generated/dawn-warden/idle/frames/dawn_warden_idle_01.png';
@@ -57,10 +58,10 @@ export function PhaserGame() {
       scene: [BattleScene],
     });
 
-    const placeDraggingBenchUnit = (clientX: number, clientY: number) => {
+    const handleDragDrop = (clientX: number, clientY: number) => {
       const state = useGameStore.getState();
 
-      if (state.dragState?.source.kind !== 'bench') {
+      if (!state.dragState) {
         return;
       }
 
@@ -88,11 +89,26 @@ export function PhaserGame() {
         return;
       }
 
-      state.placeBenchUnitOnBoard(state.dragState.source.benchIndex, position);
+      if (state.dragState.source.kind === 'bench') {
+        state.placeBenchUnitOnBoard(state.dragState.source.benchIndex, position);
+        return;
+      }
+
+      if (state.dragState.source.kind === 'item') {
+        const unitInstanceId = (battleScene as BattleScene | undefined)?.getBoardUnitInstanceIdAt(position);
+
+        if (!unitInstanceId) {
+          state.clearDragState();
+          return;
+        }
+
+        state.equipItemToUnit(state.dragState.source.itemId, unitInstanceId);
+        state.clearDragState();
+      }
     };
 
     const handlePointerUp = (event: PointerEvent) => {
-      placeDraggingBenchUnit(event.clientX, event.clientY);
+      handleDragDrop(event.clientX, event.clientY);
       setPointerPosition(undefined);
     };
     const handlePointerMove = (event: PointerEvent) => {
@@ -110,13 +126,20 @@ export function PhaserGame() {
     };
   }, []);
 
-  const draggedBenchUnit = dragState?.source.kind === 'bench' ? dragState.unit : undefined;
-  const dragPreviewImage = draggedBenchUnit ? unitPortraits[draggedBenchUnit.unitId] : undefined;
+  const draggedBenchUnit = dragState && 'unit' in dragState ? dragState.unit : undefined;
+  const draggedItem = dragState && 'item' in dragState ? dragState.item : undefined;
+  const dragPreviewImage = draggedBenchUnit
+    ? unitPortraits[draggedBenchUnit.unitId]
+    : draggedItem
+      ? itemIconUrls[draggedItem.id]
+      : undefined;
+  const dragPreviewName = draggedBenchUnit?.name ?? draggedItem?.name;
+  const dragPreviewMeta = draggedBenchUnit ? `Lv ${draggedBenchUnit.starLevel}` : draggedItem?.description;
 
   return (
     <>
       <div className={styles.phaserRoot} data-dragging={dragState ? 'true' : 'false'} ref={containerRef} />
-      {draggedBenchUnit && pointerPosition ? (
+      {dragPreviewName && pointerPosition ? (
         <div
           className={styles.dragPreview}
           style={{
@@ -124,11 +147,11 @@ export function PhaserGame() {
           }}
         >
           <div className={styles.dragPreviewArt}>
-            {dragPreviewImage ? <img src={dragPreviewImage} alt="" draggable={false} /> : draggedBenchUnit.name.slice(0, 2)}
+            {dragPreviewImage ? <img src={dragPreviewImage} alt="" draggable={false} /> : dragPreviewName.slice(0, 2)}
           </div>
           <div className={styles.dragPreviewText}>
-            <strong>{draggedBenchUnit.name}</strong>
-            <span>Lv {draggedBenchUnit.starLevel}</span>
+            <strong>{dragPreviewName}</strong>
+            <span>{dragPreviewMeta}</span>
           </div>
         </div>
       ) : null}

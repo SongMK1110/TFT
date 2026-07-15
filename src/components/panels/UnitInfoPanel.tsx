@@ -19,6 +19,8 @@ export function UnitInfoPanel() {
   const sellUnit = useGameStore((state) => state.sellUnit);
   const equipItemToUnit = useGameStore((state) => state.equipItemToUnit);
   const unequipItemFromUnit = useGameStore((state) => state.unequipItemFromUnit);
+  const startItemDrag = useGameStore((state) => state.startItemDrag);
+  const phase = useGameStore((state) => state.phase);
   const displayedUnit = useMemo(
     () => getDisplayedUnit(selectedUnitInstanceId, boardUnits, benchUnits),
     [selectedUnitInstanceId, boardUnits, benchUnits],
@@ -26,6 +28,7 @@ export function UnitInfoPanel() {
   const displayedStats = useMemo(() => getItemAdjustedUnitStats(displayedUnit), [displayedUnit]);
   const isFallbackUnit = displayedUnit.instanceId === 'featured-unit';
   const canEquipItem = !isFallbackUnit && displayedUnit.items.length < MAX_ITEMS_PER_UNIT;
+  const canDragItem = phase !== 'combat';
   const sellGold = useMemo(() => calculateUnitSellGold(displayedUnit), [displayedUnit]);
 
   return (
@@ -133,8 +136,13 @@ export function UnitInfoPanel() {
                     className={styles.itemButton}
                     type="button"
                     key={`${itemId}-${index}`}
-                    onClick={() => equipItemToUnit(itemId, displayedUnit.instanceId)}
-                    disabled={!canEquipItem}
+                    onPointerDown={() => startItemDrag(itemId)}
+                    onClick={() => {
+                      if (canEquipItem) {
+                        equipItemToUnit(itemId, displayedUnit.instanceId);
+                      }
+                    }}
+                    disabled={!canDragItem}
                   >
                     <img className={styles.itemIcon} src={itemIconUrls[item.id]} alt="" />
                     <span className={styles.itemCopy}>
