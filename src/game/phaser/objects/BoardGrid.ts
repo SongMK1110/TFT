@@ -708,7 +708,10 @@ export class BoardGrid {
     const distance = Math.hypot(targetCenter.x - sourceCenter.x, targetCenter.y - sourceCenter.y);
 
     if (sourceView) {
-      this.playUnitAttackAnimation(sourceView, targetCenter.x < sourceCenter.x);
+      const shouldFaceLeft = targetCenter.x === sourceCenter.x
+        ? (sourceView.getData('idleFlipX') as boolean)
+        : targetCenter.x < sourceCenter.x;
+      this.playUnitAttackAnimation(sourceView, shouldFaceLeft);
       const directionX = distance > 0 ? (targetCenter.x - sourceCenter.x) / distance : 0;
       const directionY = distance > 0 ? (targetCenter.y - sourceCenter.y) / distance : 0;
 
