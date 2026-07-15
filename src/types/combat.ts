@@ -74,6 +74,7 @@ export type DamageEvent = {
   type: 'damage';
   sourceInstanceId: string;
   targetInstanceId: string;
+  source: 'basicAttack' | 'skill';
   damageType: DamageType;
   amount: number;
   absorbedShield: number;

@@ -15,7 +15,12 @@ export function calculateBasicAttackDamage(attacker: CombatUnit, target: CombatU
   return isCriticalHit(attacker) ? Math.round(baseDamage * CRITICAL_DAMAGE_MULTIPLIER) : baseDamage;
 }
 
-export function applyDamage(attacker: CombatUnit, target: CombatUnit, amount: number): DamageEvent {
+export function applyDamage(
+  attacker: CombatUnit,
+  target: CombatUnit,
+  amount: number,
+  source: DamageEvent['source'] = 'basicAttack',
+): DamageEvent {
   const absorbedShield = Math.min(target.shield, amount);
   const hpDamage = amount - absorbedShield;
 
@@ -30,6 +35,7 @@ export function applyDamage(attacker: CombatUnit, target: CombatUnit, amount: nu
     type: 'damage',
     sourceInstanceId: attacker.instanceId,
     targetInstanceId: target.instanceId,
+    source,
     damageType: 'physical',
     amount,
     absorbedShield,

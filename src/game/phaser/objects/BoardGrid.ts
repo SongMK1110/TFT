@@ -518,72 +518,6 @@ export class BoardGrid {
 
   private renderPolishedCombatEffects(events: CombatEvent[], units: Array<BoardUnit | CombatUnit>, layout: BoardLayout) {
     const combatUnits = units.filter((unit): unit is CombatUnit => 'team' in unit);
-    const cinderSkillSourceIds = new Set(
-      events.flatMap((event) => {
-        if (event.type !== 'skillCast') {
-          return [];
-        }
-
-        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
-
-        return source?.unitId === 'cinder-duelist' ? [event.sourceInstanceId] : [];
-      }),
-    );
-    const frostSkillSourceIds = new Set(
-      events.flatMap((event) => {
-        if (event.type !== 'skillCast') {
-          return [];
-        }
-
-        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
-
-        return source?.unitId === 'frost-archer' ? [event.sourceInstanceId] : [];
-      }),
-    );
-    const glacierSkillSourceIds = new Set(
-      events.flatMap((event) => {
-        if (event.type !== 'skillCast') {
-          return [];
-        }
-
-        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
-
-        return source?.unitId === 'glacier-mage' ? [event.sourceInstanceId] : [];
-      }),
-    );
-    const shadeSkillSourceIds = new Set(
-      events.flatMap((event) => {
-        if (event.type !== 'skillCast') {
-          return [];
-        }
-
-        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
-
-        return source?.unitId === 'shade-stalker' ? [event.sourceInstanceId] : [];
-      }),
-    );
-    const thunderSkillSourceIds = new Set(
-      events.flatMap((event) => {
-        if (event.type !== 'skillCast') {
-          return [];
-        }
-
-        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
-
-        return source?.unitId === 'thunder-bruiser' ? [event.sourceInstanceId] : [];
-      }),
-    );
-    const celestialSkillSourceIds = new Set(
-      events.flatMap((event) => {
-        if (event.type !== 'skillCast') {
-          return [];
-        }
-
-        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
-
-        return source?.unitId === 'celestial-sage' ? [event.sourceInstanceId] : [];
-      }),
-    );
 
     for (const event of events) {
       if (event.type === 'skillCast') {
@@ -608,27 +542,8 @@ export class BoardGrid {
 
         if (source && target) {
           const isStrongHit = event.amount >= target.maxHp * STRONG_HIT_DAMAGE_THRESHOLD_RATIO;
-          const isCinderSkillDamage = cinderSkillSourceIds.has(source.instanceId);
-          const isFrostSkillDamage = frostSkillSourceIds.has(source.instanceId);
-          const isGlacierSkillDamage = glacierSkillSourceIds.has(source.instanceId);
-          const isShadeSkillDamage = shadeSkillSourceIds.has(source.instanceId);
-          const isThunderSkillDamage = thunderSkillSourceIds.has(source.instanceId);
-          const isCelestialSkillDamage = celestialSkillSourceIds.has(source.instanceId);
-
-          if (isCinderSkillDamage) {
-            this.playCinderDuelistSkillStrikeEffect(source, target, layout);
-            this.playCinderDuelistHitEffect(target, layout);
-          } else if (isFrostSkillDamage) {
-            this.playFrostArcherSkillShotEffect(source, target, event.amount, layout);
-            this.playFrostArcherHitEffect(target, layout);
-          } else if (isGlacierSkillDamage) {
-            this.playGlacierMageIceBloomHitEffect(target, layout);
-          } else if (isShadeSkillDamage) {
-            this.playShadeStalkerShadowLungeEffect(source, target, layout);
-          } else if (isThunderSkillDamage) {
-            this.playThunderBruiserThunderClapEffect(target, layout);
-          } else if (isCelestialSkillDamage) {
-            this.playCelestialSageStarfallEffect(target, layout);
+          if (event.source === 'skill') {
+            this.playUnitSkillDamageEffect(source, target, event.amount, layout);
           } else {
             this.playBasicAttackEffect(source, target, event.amount, layout);
             if (!['thunder-bruiser', 'dawn-warden', 'ember-guard', 'cinder-duelist', 'shade-stalker', 'ironwood-bulwark'].includes(source.unitId)) {
@@ -698,6 +613,27 @@ export class BoardGrid {
       if (event.type === 'combatEnd') {
         this.playResultBanner(event.result, layout);
       }
+    }
+  }
+
+  private playUnitSkillDamageEffect(source: CombatUnit, target: CombatUnit, amount: number, layout: BoardLayout) {
+    if (source.unitId === 'cinder-duelist') {
+      this.playCinderDuelistSkillStrikeEffect(source, target, layout);
+      this.playCinderDuelistHitEffect(target, layout);
+    } else if (source.unitId === 'frost-archer') {
+      this.playFrostArcherSkillShotEffect(source, target, amount, layout);
+      this.playFrostArcherHitEffect(target, layout);
+    } else if (source.unitId === 'glacier-mage') {
+      this.playGlacierMageIceBloomHitEffect(target, layout);
+    } else if (source.unitId === 'shade-stalker') {
+      this.playShadeStalkerShadowLungeEffect(source, target, layout);
+    } else if (source.unitId === 'thunder-bruiser') {
+      this.playThunderBruiserThunderClapEffect(target, layout);
+    } else if (source.unitId === 'celestial-sage') {
+      this.playCelestialSageStarfallEffect(target, layout);
+    } else {
+      this.playBasicAttackEffect(source, target, amount, layout);
+      this.playHitEffect(target, layout);
     }
   }
 

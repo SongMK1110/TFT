@@ -133,7 +133,7 @@ function scaleSkillValue(caster: CombatUnit, value: number): number {
 
 function applySkillDamage(caster: CombatUnit, target: CombatUnit, amount: number): CombatEvent[] {
   const damageEvent = {
-    ...applyDamage(caster, target, amount),
+    ...applyDamage(caster, target, amount, 'skill'),
     damageType: 'magic' as const,
   };
 

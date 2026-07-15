@@ -4,6 +4,7 @@ import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
 import { getItemAdjustedUnitStats } from './item/itemSystem';
+import { applyDamage } from './combat/damageSystem';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
 import { findBestTarget } from './combat/targetSystem';
@@ -136,6 +137,14 @@ describe('core regression checks', () => {
     const state: CombatState = { isRunning: true, elapsedMs: 0, units: [player, defeatedEnemy], events: [] };
 
     expect(getCombatResult(state)).toBe('playerWin');
+  });
+
+  it('marks basic and skill damage with distinct combat event sources', () => {
+    const attacker = createCombatUnit('attacker', 'player', { row: 3, col: 3 });
+    const target = createCombatUnit('target', 'enemy', { row: 0, col: 3 });
+
+    expect(applyDamage(attacker, target, 10).source).toBe('basicAttack');
+    expect(applyDamage(attacker, target, 10, 'skill').source).toBe('skill');
   });
 });
 
