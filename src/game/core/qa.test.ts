@@ -3,7 +3,7 @@ import { items } from '../../data/items';
 import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
-import { getItemAdjustedUnitStats } from './item/itemSystem';
+import { equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
 import { applyDamage } from './combat/damageSystem';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
@@ -81,6 +81,25 @@ describe('core regression checks', () => {
     expect(stats.attackDamage).toBe(unit.attackDamage + 10);
     expect(stats.maxHp).toBe(unit.maxHp + 150);
     expect(unit.attackDamage).toBe(58);
+  });
+
+  it('combines matching component items into one completed item without consuming an extra slot', () => {
+    const unit = {
+      ...createPlayerUnit('cinder-duelist', 'recipe-unit'),
+      items: [getItem('iron-blade'), getItem('giant-belt'), getItem('focus-charm')],
+    };
+    const result = equipItem({
+      itemId: 'swift-bow',
+      unitInstanceId: unit.instanceId,
+      playerItems: ['swift-bow'],
+      benchUnits: [unit],
+      boardUnits: [],
+      itemPool: items,
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.playerItems).toEqual([]);
+    expect(result.benchUnits[0]?.items.map((item) => item.id)).toEqual(['flame-rapidblade', 'giant-belt', 'focus-charm']);
   });
 
   it('calculates economy rewards and level progress deterministically', () => {

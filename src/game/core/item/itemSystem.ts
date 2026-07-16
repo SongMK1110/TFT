@@ -46,28 +46,60 @@ export function equipItem(input: EquipItemInput): ItemActionOutput {
     return unchangedResult('아이템을 장착할 유닛을 찾을 수 없습니다.', input);
   }
 
-  if (unit.items.length >= MAX_ITEMS_PER_UNIT) {
+  const recipeMatch = findItemRecipe(input.itemPool, unit.items, item.id);
+
+  if (unit.items.length >= MAX_ITEMS_PER_UNIT && !recipeMatch) {
     return unchangedResult('유닛은 아이템을 최대 3개까지 장착할 수 있습니다.', input);
   }
 
   const playerItems = input.playerItems.filter((_, index) => index !== inventoryIndex);
-  const nextItem = cloneItem(item);
+  const nextItems = recipeMatch
+    ? unit.items.map((equippedItem, index) => (index === recipeMatch.equippedItemIndex ? cloneItem(recipeMatch.completedItem) : equippedItem))
+    : [...unit.items, cloneItem(item)];
   const nextBenchUnits = updateBenchUnit(input.benchUnits, input.unitInstanceId, (target) => ({
     ...target,
-    items: [...target.items, nextItem],
+    items: nextItems,
   }));
   const nextBoardUnits = updateBoardUnit(input.boardUnits, input.unitInstanceId, (target) => ({
     ...target,
-    items: [...target.items, nextItem],
+    items: nextItems,
   }));
 
   return {
     success: true,
-    message: `${item.name} 장착 완료`,
+    message: recipeMatch ? `${recipeMatch.completedItem.name} 조합 완료` : `${item.name} 장착 완료`,
     playerItems,
     benchUnits: nextBenchUnits,
     boardUnits: nextBoardUnits,
   };
+}
+
+export function findItemRecipe(
+  itemPool: Item[],
+  equippedItems: Item[],
+  incomingItemId: Item['id'],
+): { completedItem: Item; equippedItemIndex: number } | undefined {
+  for (let equippedItemIndex = 0; equippedItemIndex < equippedItems.length; equippedItemIndex += 1) {
+    const equippedItem = equippedItems[equippedItemIndex];
+    const completedItem = itemPool.find((candidate) => {
+      if (!candidate.recipe) {
+        return false;
+      }
+
+      const [firstComponentId, secondComponentId] = candidate.recipe;
+
+      return (
+        (firstComponentId === incomingItemId && secondComponentId === equippedItem.id) ||
+        (secondComponentId === incomingItemId && firstComponentId === equippedItem.id)
+      );
+    });
+
+    if (completedItem) {
+      return { completedItem, equippedItemIndex };
+    }
+  }
+
+  return undefined;
 }
 
 export function unequipItem(input: UnequipItemInput): ItemActionOutput {

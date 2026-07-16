@@ -28,6 +28,7 @@ export type Item = {
   description: string;
   statBonus: ItemStatBonus;
   effects: ItemEffect[];
+  recipe?: [Item['id'], Item['id']];
 };
 
 export type ItemChoiceReason = 'starter' | 'roundReward';
