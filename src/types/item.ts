@@ -16,12 +16,14 @@ export type ItemEffectType =
   | 'skillPowerPercent'
   | 'maxManaReduction'
   | 'startingManaFlat'
-  | 'nearbyEnemyAttackSpeedReduction';
+  | 'nearbyEnemyAttackSpeedReduction'
+  | 'bonusDamageAgainstHighHp';
 
 export type ItemEffect = {
   type: ItemEffectType;
   value: number;
   radius?: number;
+  targetMaxHpThreshold?: number;
 };
 
 export type Item = {

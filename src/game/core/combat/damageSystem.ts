@@ -11,8 +11,21 @@ export function calculateBasicAttackDamage(attacker: CombatUnit, target: CombatU
     MIN_BASIC_ATTACK_DAMAGE,
     Math.round(attacker.attackDamage - target.armor * ARMOR_DAMAGE_REDUCTION_RATIO),
   );
+  const criticalDamage = isCriticalHit(attacker) ? Math.round(baseDamage * CRITICAL_DAMAGE_MULTIPLIER) : baseDamage;
+  const bonusDamagePercent = attacker.items.reduce(
+    (total, item) =>
+      total +
+      item.effects.reduce(
+        (itemTotal, effect) =>
+          effect.type === 'bonusDamageAgainstHighHp' && target.maxHp >= (effect.targetMaxHpThreshold ?? Number.POSITIVE_INFINITY)
+            ? itemTotal + effect.value
+            : itemTotal,
+        0,
+      ),
+    0,
+  );
 
-  return isCriticalHit(attacker) ? Math.round(baseDamage * CRITICAL_DAMAGE_MULTIPLIER) : baseDamage;
+  return Math.round(criticalDamage * (1 + bonusDamagePercent / 100));
 }
 
 export function applyDamage(

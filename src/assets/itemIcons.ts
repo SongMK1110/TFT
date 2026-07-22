@@ -17,6 +17,7 @@ import rangerBowIcon from '../../assets/generated/items/completed/ranger-bow/fra
 import archmageHatIcon from '../../assets/generated/items/completed/archmage-hat/frames/archmage-hat_01.png';
 import blueEssenceIcon from '../../assets/generated/items/completed/blue-essence/frames/blue-essence_01.png';
 import frozenHeartIcon from '../../assets/generated/items/completed/frozen-heart/frames/frozen-heart_01.png';
+import giantSlayerIcon from '../../assets/generated/items/completed/giant-slayer/frames/giant-slayer_01.png';
 import type { Item } from '../types/item';
 
 export const itemIconUrls: Record<Item['id'], string> = {
@@ -39,4 +40,5 @@ export const itemIconUrls: Record<Item['id'], string> = {
   'archmage-hat': archmageHatIcon,
   'blue-essence': blueEssenceIcon,
   'frozen-heart': frozenHeartIcon,
+  'giant-slayer': giantSlayerIcon,
 };

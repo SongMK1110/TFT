@@ -4,7 +4,7 @@ import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
 import { applyItemEffects, equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
-import { applyDamage } from './combat/damageSystem';
+import { applyDamage, calculateBasicAttackDamage } from './combat/damageSystem';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
 import { findBestTarget } from './combat/targetSystem';
@@ -112,6 +112,16 @@ describe('core regression checks', () => {
     expect(applied.find((unit) => unit.instanceId === 'nearby-enemy')?.attackSpeed).toBe(0.8);
     expect(applied.find((unit) => unit.instanceId === 'distant-enemy')?.attackSpeed).toBe(1);
     expect(nearbyEnemy.attackSpeed).toBe(1);
+  });
+
+  it('increases giant slayer basic attack damage only against high-health targets', () => {
+    const attacker = createCombatUnit('slayer', 'player', { row: 3, col: 3 }, { items: [getItem('giant-slayer')] });
+    const highHealthTarget = createCombatUnit('high-health', 'enemy', { row: 0, col: 3 }, { maxHp: 700, currentHp: 700 });
+    const standardTarget = createCombatUnit('standard', 'enemy', { row: 0, col: 4 }, { maxHp: 500, currentHp: 500 });
+    const [equippedAttacker] = applyItemEffects([attacker]);
+
+    expect(calculateBasicAttackDamage(equippedAttacker, highHealthTarget)).toBe(69);
+    expect(calculateBasicAttackDamage(equippedAttacker, standardTarget)).toBe(55);
   });
 
   it('calculates economy rewards and level progress deterministically', () => {

@@ -199,6 +199,18 @@ export const items: Item[] = [
     ],
     recipe: ['guardian-armor', 'mana-crystal'],
   },
+  {
+    id: 'giant-slayer',
+    name: '거인의 학살자',
+    description: '공격력과 체력을 얻고, 최대 체력이 높은 적에게 기본 공격 피해가 증가합니다.',
+    statBonus: { attackDamage: 15, maxHp: 150 },
+    effects: [
+      { type: 'attackDamageFlat', value: 15 },
+      { type: 'maxHpFlat', value: 150 },
+      { type: 'bonusDamageAgainstHighHp', value: 25, targetMaxHpThreshold: 600 },
+    ],
+    recipe: ['iron-blade', 'giant-belt'],
+  },
 ];
 
 export const starterItemIds: Item['id'][] = ['iron-blade', 'giant-belt', 'swift-bow'];
