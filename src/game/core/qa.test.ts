@@ -4,7 +4,7 @@ import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
 import { applyItemEffects, equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
-import { applyDamage, calculateBasicAttackDamage, tryRevive } from './combat/damageSystem';
+import { applyBasicAttackLifesteal, applyDamage, calculateBasicAttackDamage, tryRevive } from './combat/damageSystem';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
 import { findBestTarget } from './combat/targetSystem';
@@ -135,6 +135,13 @@ describe('core regression checks', () => {
     applyDamage(attacker, target, 100);
     expect(tryRevive(target)).toBeUndefined();
     expect(target.isAlive).toBe(false);
+  });
+
+  it('restores health from bloodthirster only after basic attack health damage', () => {
+    const attacker = createCombatUnit('vampire', 'player', { row: 3, col: 3 }, { currentHp: 50, items: [getItem('bloodthirster')] });
+
+    expect(applyBasicAttackLifesteal(attacker, 40)).toMatchObject({ type: 'heal', amount: 10, remainingHp: 60 });
+    expect(applyBasicAttackLifesteal(attacker, 0)).toBeUndefined();
   });
 
   it('calculates economy rewards and level progress deterministically', () => {

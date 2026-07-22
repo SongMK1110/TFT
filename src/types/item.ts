@@ -18,7 +18,8 @@ export type ItemEffectType =
   | 'startingManaFlat'
   | 'nearbyEnemyAttackSpeedReduction'
   | 'bonusDamageAgainstHighHp'
-  | 'reviveOnLethalDamage';
+  | 'reviveOnLethalDamage'
+  | 'basicAttackLifesteal';
 
 export type ItemEffect = {
   type: ItemEffectType;

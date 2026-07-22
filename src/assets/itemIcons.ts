@@ -19,6 +19,7 @@ import blueEssenceIcon from '../../assets/generated/items/completed/blue-essence
 import frozenHeartIcon from '../../assets/generated/items/completed/frozen-heart/frames/frozen-heart_01.png';
 import giantSlayerIcon from '../../assets/generated/items/completed/giant-slayer/frames/giant-slayer_01.png';
 import guardianAngelIcon from '../../assets/generated/items/completed/guardian-angel/frames/guardian-angel_01.png';
+import bloodthirsterIcon from '../../assets/generated/items/completed/bloodthirster/frames/bloodthirster_01.png';
 import type { Item } from '../types/item';
 
 export const itemIconUrls: Record<Item['id'], string> = {
@@ -43,4 +44,5 @@ export const itemIconUrls: Record<Item['id'], string> = {
   'frozen-heart': frozenHeartIcon,
   'giant-slayer': giantSlayerIcon,
   'guardian-angel': guardianAngelIcon,
+  bloodthirster: bloodthirsterIcon,
 };

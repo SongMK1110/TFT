@@ -4,6 +4,7 @@ import {
   MIN_BASIC_ATTACK_DAMAGE,
   type CombatUnit,
   type DamageEvent,
+  type HealEvent,
   type ReviveEvent,
 } from '../../../types/combat';
 
@@ -87,6 +88,37 @@ export function tryRevive(target: CombatUnit): ReviveEvent | undefined {
   }
 
   return undefined;
+}
+
+export function applyBasicAttackLifesteal(attacker: CombatUnit, healthDamage: number): HealEvent | undefined {
+  if (!attacker.isAlive || healthDamage <= 0 || attacker.currentHp >= attacker.maxHp) {
+    return undefined;
+  }
+
+  const lifestealPercent = attacker.items.reduce(
+    (total, item) =>
+      total +
+      item.effects.reduce(
+        (itemTotal, effect) => (effect.type === 'basicAttackLifesteal' ? itemTotal + effect.value : itemTotal),
+        0,
+      ),
+    0,
+  );
+
+  if (lifestealPercent <= 0) {
+    return undefined;
+  }
+
+  const amount = Math.min(attacker.maxHp - attacker.currentHp, Math.max(1, Math.round(healthDamage * (lifestealPercent / 100))));
+  attacker.currentHp += amount;
+
+  return {
+    type: 'heal',
+    sourceInstanceId: attacker.instanceId,
+    targetInstanceId: attacker.instanceId,
+    amount,
+    remainingHp: attacker.currentHp,
+  };
 }
 
 function isCriticalHit(attacker: CombatUnit): boolean {

@@ -223,6 +223,18 @@ export const items: Item[] = [
     ],
     recipe: ['swift-bow', 'guardian-armor'],
   },
+  {
+    id: 'bloodthirster',
+    name: '피바라기',
+    description: '공격력과 빠른 시전을 얻고, 기본 공격으로 입힌 체력 피해만큼 회복합니다.',
+    statBonus: { attackDamage: 15, maxManaReduction: 10 },
+    effects: [
+      { type: 'attackDamageFlat', value: 15 },
+      { type: 'maxManaReduction', value: 10 },
+      { type: 'basicAttackLifesteal', value: 25 },
+    ],
+    recipe: ['iron-blade', 'focus-charm'],
+  },
 ];
 
 export const starterItemIds: Item['id'][] = ['iron-blade', 'giant-belt', 'swift-bow'];

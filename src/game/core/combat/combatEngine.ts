@@ -11,7 +11,7 @@ import {
   type CombatUnit,
 } from '../../../types/combat';
 import type { BoardUnit } from '../../../types/game';
-import { applyDamage, calculateBasicAttackDamage, tryRevive } from './damageSystem';
+import { applyBasicAttackLifesteal, applyDamage, calculateBasicAttackDamage, tryRevive } from './damageSystem';
 import { tryMoveTowardTarget } from './movementSystem';
 import { getCombatResult } from './resultSystem';
 import { canCastSkill, castSkill, gainMana } from './skillSystem';
@@ -110,6 +110,7 @@ export function stepCombat(state: CombatState, deltaMs: number): CombatStepResul
       if (reviveEvent) {
         events.push(reviveEvent);
       }
+      pushOptionalEvent(events, applyBasicAttackLifesteal(unit, damageEvent.amount - damageEvent.absorbedShield));
       pushOptionalEvent(events, gainMana(unit, BASIC_ATTACK_MANA_GAIN, 'basicAttack'));
 
       if (currentTarget.isAlive) {
