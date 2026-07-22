@@ -129,13 +129,15 @@ export function unequipItem(input: UnequipItemInput): ItemActionOutput {
 }
 
 export function applyItemEffects(combatUnits: CombatUnit[]): CombatUnit[] {
-  return combatUnits.map((unit) => {
+  const statAppliedUnits = combatUnits.map((unit) => {
     if (unit.items.length === 0) {
       return cloneCombatUnit(unit);
     }
 
     return unit.items.reduce(applyItemToCombatUnit, cloneCombatUnit(unit));
   });
+
+  return applyCombatStartAuras(statAppliedUnits);
 }
 
 export function getItemAdjustedUnitStats(unit: PlayerUnit): ItemAdjustedUnitStats {
@@ -187,6 +189,8 @@ function applyItemToCombatUnit(unit: CombatUnit, item: Item): CombatUnit {
           ...nextUnit,
           currentMana: Math.min(nextUnit.maxMana, nextUnit.currentMana + effect.value),
         };
+      case 'nearbyEnemyAttackSpeedReduction':
+        return nextUnit;
       default:
         return nextUnit;
     }
@@ -220,6 +224,8 @@ function applyItemToDisplayStats(stats: ItemAdjustedUnitStats, item: Item): Item
           ...nextStats,
           currentMana: Math.min(nextStats.maxMana, nextStats.currentMana + effect.value),
         };
+      case 'nearbyEnemyAttackSpeedReduction':
+        return nextStats;
       default:
         return nextStats;
     }
@@ -280,6 +286,44 @@ function cloneCombatUnit(unit: CombatUnit): CombatUnit {
     shields: unit.shields.map((shield) => ({ ...shield })),
     statusEffects: unit.statusEffects.map((effect) => ({ ...effect })),
   };
+}
+
+function applyCombatStartAuras(combatUnits: CombatUnit[]): CombatUnit[] {
+  return combatUnits.map((unit) => {
+    const reductions = combatUnits.flatMap((source) => {
+      if (source.team === unit.team || !source.isAlive) {
+        return [];
+      }
+
+      return source.items.flatMap((item) =>
+        item.effects.flatMap((effect) => {
+          if (effect.type !== 'nearbyEnemyAttackSpeedReduction' || !isWithinAura(source, unit, effect.radius ?? 1)) {
+            return [];
+          }
+
+          return [effect.value];
+        }),
+      );
+    });
+
+    if (reductions.length === 0) {
+      return unit;
+    }
+
+    const strongestReduction = Math.max(...reductions);
+
+    return {
+      ...unit,
+      attackSpeed: roundStat(unit.attackSpeed * Math.max(0.1, 1 - strongestReduction / 100)),
+    };
+  });
+}
+
+function isWithinAura(source: CombatUnit, target: CombatUnit, radius: number): boolean {
+  return Math.max(
+    Math.abs(source.position.row - target.position.row),
+    Math.abs(source.position.col - target.position.col),
+  ) <= radius;
 }
 
 function roundStat(value: number): number {

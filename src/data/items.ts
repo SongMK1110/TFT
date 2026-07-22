@@ -187,6 +187,18 @@ export const items: Item[] = [
     ],
     recipe: ['mystic-staff', 'focus-charm'],
   },
+  {
+    id: 'frozen-heart',
+    name: '얼어붙은 심장',
+    description: '방어력과 시작 마나를 얻고, 주변 적의 공격 속도를 낮춥니다.',
+    statBonus: { armor: 20, startingMana: 15 },
+    effects: [
+      { type: 'armorFlat', value: 20 },
+      { type: 'startingManaFlat', value: 15 },
+      { type: 'nearbyEnemyAttackSpeedReduction', value: 20, radius: 2 },
+    ],
+    recipe: ['guardian-armor', 'mana-crystal'],
+  },
 ];
 
 export const starterItemIds: Item['id'][] = ['iron-blade', 'giant-belt', 'swift-bow'];

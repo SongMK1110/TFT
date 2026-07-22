@@ -3,7 +3,7 @@ import { items } from '../../data/items';
 import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
-import { equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
+import { applyItemEffects, equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
 import { applyDamage } from './combat/damageSystem';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
@@ -100,6 +100,18 @@ describe('core regression checks', () => {
     expect(result.success).toBe(true);
     expect(result.playerItems).toEqual([]);
     expect(result.benchUnits[0]?.items.map((item) => item.id)).toEqual(['flame-rapidblade', 'giant-belt', 'focus-charm']);
+  });
+
+  it('applies frozen heart stats and slows only nearby enemies at combat start', () => {
+    const holder = createCombatUnit('holder', 'player', { row: 2, col: 3 }, { items: [getItem('frozen-heart')] });
+    const nearbyEnemy = createCombatUnit('nearby-enemy', 'enemy', { row: 0, col: 3 });
+    const distantEnemy = createCombatUnit('distant-enemy', 'enemy', { row: 0, col: 6 });
+    const applied = applyItemEffects([holder, nearbyEnemy, distantEnemy]);
+
+    expect(applied.find((unit) => unit.instanceId === 'holder')).toMatchObject({ armor: 20, currentMana: 15 });
+    expect(applied.find((unit) => unit.instanceId === 'nearby-enemy')?.attackSpeed).toBe(0.8);
+    expect(applied.find((unit) => unit.instanceId === 'distant-enemy')?.attackSpeed).toBe(1);
+    expect(nearbyEnemy.attackSpeed).toBe(1);
   });
 
   it('calculates economy rewards and level progress deterministically', () => {

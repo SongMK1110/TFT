@@ -15,11 +15,13 @@ export type ItemEffectType =
   | 'armorFlat'
   | 'skillPowerPercent'
   | 'maxManaReduction'
-  | 'startingManaFlat';
+  | 'startingManaFlat'
+  | 'nearbyEnemyAttackSpeedReduction';
 
 export type ItemEffect = {
   type: ItemEffectType;
   value: number;
+  radius?: number;
 };
 
 export type Item = {

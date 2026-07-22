@@ -297,6 +297,14 @@ export class BoardGrid {
       .setDepth(50);
     const token = this.scene.add.circle(0, 0, radius, fillColor, spriteSpec ? 0.001 : 0.95);
 
+    if (isCombatUnit && unit.items.some((item) => item.id === 'frozen-heart')) {
+      const frostAura = this.scene.add
+        .ellipse(0, 0, layout.tileSize * 3.55, layout.tileSize * 2.55, 0x38bdf8, 0.035)
+        .setStrokeStyle(2, 0x7dd3fc, 0.24);
+
+      container.add(frostAura);
+    }
+
     if (!spriteSpec) {
       token.setStrokeStyle(3, UNIT_STROKE_COLOR, 0.95);
     }
