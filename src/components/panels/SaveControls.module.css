@@ -1,6 +1,6 @@
 .savePanel {
   display: grid;
-  grid-template-columns: auto minmax(360px, 1fr) auto minmax(180px, 0.5fr);
+  grid-template-columns: auto auto minmax(300px, 1fr) auto minmax(180px, 0.5fr);
   align-items: center;
   gap: 8px;
   min-width: 0;
@@ -12,7 +12,8 @@
 }
 
 .actionGroup,
-.audioGroup {
+.audioGroup,
+.developerGroup {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -28,6 +29,27 @@
   background: rgba(30, 41, 59, 0.88);
   font-weight: 800;
   cursor: pointer;
+}
+
+.developerGroup {
+  padding-left: 8px;
+  border-left: 1px solid rgba(56, 189, 248, 0.22);
+}
+
+.developerGroup button {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid rgba(251, 191, 36, 0.42);
+  border-radius: 6px;
+  color: #fef3c7;
+  background: rgba(120, 53, 15, 0.42);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.developerGroup button:hover {
+  border-color: rgba(253, 224, 71, 0.8);
+  background: rgba(146, 64, 14, 0.62);
 }
 
 .actionGroup button:hover:not(:disabled) {
@@ -86,8 +108,14 @@
   }
 
   .actionGroup,
-  .audioGroup {
+  .audioGroup,
+  .developerGroup {
     flex-wrap: wrap;
+  }
+
+  .developerGroup {
+    padding-left: 0;
+    border-left: 0;
   }
 
   .saveStatus,

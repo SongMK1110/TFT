@@ -1,6 +1,23 @@
 import { useGameStore } from '../../store/useGameStore';
 import styles from './SaveControls.module.css';
 
+const developerComponentBundle = [
+  'iron-blade',
+  'iron-blade',
+  'giant-belt',
+  'giant-belt',
+  'swift-bow',
+  'swift-bow',
+  'mystic-staff',
+  'mystic-staff',
+  'guardian-armor',
+  'guardian-armor',
+  'focus-charm',
+  'focus-charm',
+  'mana-crystal',
+  'mana-crystal',
+] as const;
+
 const volumeControls = [
   { key: 'masterVolume', label: '전체' },
   { key: 'bgmVolume', label: 'BGM' },
@@ -17,6 +34,8 @@ export function SaveControls() {
   const resetSave = useGameStore((state) => state.resetSave);
   const setAudioMuted = useGameStore((state) => state.setAudioMuted);
   const setAudioVolume = useGameStore((state) => state.setAudioVolume);
+  const grantDeveloperItems = useGameStore((state) => state.grantDeveloperItems);
+  const isDeveloperToolsEnabled = import.meta.env.DEV;
 
   return (
     <section className={styles.savePanel} aria-label="저장 및 설정">
@@ -34,6 +53,17 @@ export function SaveControls() {
           저장 삭제
         </button>
       </div>
+
+      {isDeveloperToolsEnabled ? (
+        <div className={styles.developerGroup} aria-label="개발자 아이템 도구">
+          <button type="button" onClick={() => grantDeveloperItems([...developerComponentBundle])}>
+            재료 2세트 지급
+          </button>
+          <button type="button" onClick={() => grantDeveloperItems(['frozen-heart'])}>
+            얼어붙은 심장 지급
+          </button>
+        </div>
+      ) : null}
 
       <div className={styles.audioGroup}>
         <label className={styles.muteToggle}>

@@ -93,6 +93,7 @@ type GameState = {
   buyXp: () => ShopActionResult;
   sellUnit: (unitInstanceId: string) => ShopActionResult;
   activateDeveloperGoldCheat: () => ShopActionResult;
+  grantDeveloperItems: (itemIds: Item['id'][]) => ShopActionResult;
   equipItemToUnit: (itemId: Item['id'], unitInstanceId: string) => ShopActionResult;
   unequipItemFromUnit: (unitInstanceId: string, itemIndex: number) => ShopActionResult;
   selectItemChoice: (itemId: Item['id']) => ShopActionResult;
@@ -312,6 +313,32 @@ export const useGameStore = create<GameState>((set, get) => ({
       message: result.message,
     });
     audioManager.playSfx('coin');
+
+    return result;
+  },
+  grantDeveloperItems: (itemIds) => {
+    const state = get();
+
+    if (isPlacementLocked(state.phase)) {
+      const result = { success: false, message: '전투 중에는 개발자 아이템을 지급할 수 없습니다.' };
+      set({ message: result.message });
+      return result;
+    }
+
+    const validItemIds = itemIds.filter((itemId) => getItemById(itemId));
+
+    if (validItemIds.length === 0) {
+      const result = { success: false, message: '지급할 수 있는 아이템이 없습니다.' };
+      set({ message: result.message });
+      return result;
+    }
+
+    const result = { success: true, message: `개발자 아이템 ${validItemIds.length}개 지급 완료` };
+    set({
+      playerItems: [...state.playerItems, ...validItemIds],
+      pendingItemChoice: undefined,
+      message: result.message,
+    });
 
     return result;
   },
