@@ -7,6 +7,7 @@ import focusCharmIcon from '../../assets/generated/items/frames/item-icons_06.pn
 import manaCrystalIcon from '../../assets/generated/items/frames/item-icons_07.png';
 import flameRapidbladeIcon from '../../assets/generated/items/completed/flame-rapidblade/frames/flame-rapidblade_01.png';
 import runebladeIcon from '../../assets/generated/items/completed/runeblade/frames/runeblade_01.png';
+import manaBladeIcon from '../../assets/generated/items/completed/mana-blade/frames/mana-blade_01.png';
 import type { Item } from '../types/item';
 
 export const itemIconUrls: Record<Item['id'], string> = {
@@ -19,7 +20,7 @@ export const itemIconUrls: Record<Item['id'], string> = {
   'mana-crystal': manaCrystalIcon,
   'flame-rapidblade': flameRapidbladeIcon,
   runeblade: runebladeIcon,
-  'mana-blade': ironBladeIcon,
+  'mana-blade': manaBladeIcon,
   'warmog-heart': giantBeltIcon,
   'giant-plate': guardianArmorIcon,
   'spirit-cape': giantBeltIcon,
