@@ -5,6 +5,7 @@ import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
 import { applyItemEffects, equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
 import { applyBasicAttackLifesteal, applyDamage, calculateBasicAttackDamage, tryRevive } from './combat/damageSystem';
+import { stepCombat } from './combat/combatEngine';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
 import { findBestTarget } from './combat/targetSystem';
@@ -13,7 +14,7 @@ import { calculateSynergyStates, getActiveSynergies, applySynergyEffects } from 
 import { resolveUnitUpgrades } from './upgrade/unitUpgradeSystem';
 import { loadGameState, SAVE_DATA_VERSION, SAVE_STORAGE_KEY, saveGameState, type SaveableGameState } from './save/saveManager';
 import type { BoardUnit } from '../../types/game';
-import type { CombatState, CombatTeam, CombatUnit } from '../../types/combat';
+import type { CombatEvent, CombatState, CombatTeam, CombatUnit } from '../../types/combat';
 import type { PlayerUnit, Unit } from '../../types/unit';
 
 class MemoryStorage {
@@ -142,6 +143,23 @@ describe('core regression checks', () => {
 
     expect(applyBasicAttackLifesteal(attacker, 40)).toMatchObject({ type: 'heal', amount: 10, remainingHp: 60 });
     expect(applyBasicAttackLifesteal(attacker, 0)).toBeUndefined();
+  });
+
+  it('chains lightning bow damage to two nearby enemies after a basic attack', () => {
+    const attacker = createCombatUnit('lightning-archer', 'player', { row: 3, col: 3 }, { attackRange: 4, items: [getItem('lightning-bow')] });
+    const primaryTarget = createCombatUnit('primary', 'enemy', { row: 1, col: 3 });
+    const firstChainTarget = createCombatUnit('chain-one', 'enemy', { row: 0, col: 3 });
+    const secondChainTarget = createCombatUnit('chain-two', 'enemy', { row: 1, col: 4 });
+    const distantTarget = createCombatUnit('distant', 'enemy', { row: 0, col: 6 });
+    const result = stepCombat({ isRunning: true, elapsedMs: 0, units: [attacker, primaryTarget, firstChainTarget, secondChainTarget, distantTarget], events: [] }, 0);
+    const chainEvent = result.events.find((event) => event.type === 'chainLightning');
+    const lightningDamageEvents = result.events.filter(
+      (event): event is Extract<CombatEvent, { type: 'damage' }> => event.type === 'damage' && event.source === 'item',
+    );
+
+    expect(chainEvent).toMatchObject({ type: 'chainLightning', targetInstanceIds: ['chain-one', 'chain-two'] });
+    expect(lightningDamageEvents).toHaveLength(2);
+    expect(lightningDamageEvents.every((event) => event.damageType === 'magic')).toBe(true);
   });
 
   it('calculates economy rewards and level progress deterministically', () => {

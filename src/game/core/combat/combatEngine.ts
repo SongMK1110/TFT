@@ -15,7 +15,7 @@ import { applyBasicAttackLifesteal, applyDamage, calculateBasicAttackDamage, try
 import { tryMoveTowardTarget } from './movementSystem';
 import { getCombatResult } from './resultSystem';
 import { canCastSkill, castSkill, gainMana } from './skillSystem';
-import { findBestTarget, isInAttackRange } from './targetSystem';
+import { findBestTarget, getBoardDistance, isInAttackRange } from './targetSystem';
 
 type CreateCombatStateInput = {
   playerUnits: BoardUnit[];
@@ -124,6 +124,8 @@ export function stepCombat(state: CombatState, deltaMs: number): CombatStepResul
         });
       }
 
+      events.push(...resolveChainLightning(unit, currentTarget, nextState.units));
+
       if (canCastSkill(unit)) {
         events.push(...castSkill(unit, nextState.units, nextState.elapsedMs));
       }
@@ -144,6 +146,59 @@ export function stepCombat(state: CombatState, deltaMs: number): CombatStepResul
     state: nextState,
     events,
   };
+}
+
+function resolveChainLightning(attacker: CombatUnit, initialTarget: CombatUnit, units: CombatUnit[]): CombatEvent[] {
+  const effect = attacker.items.flatMap((item) => item.effects).find((candidate) => candidate.type === 'chainLightningOnBasicAttack');
+
+  if (!effect) {
+    return [];
+  }
+
+  const targets = units
+    .filter((unit) => unit.isAlive && unit.team !== attacker.team && unit.instanceId !== initialTarget.instanceId)
+    .filter((unit) => getBoardDistance(initialTarget.position, unit.position) <= (effect.radius ?? 1))
+    .sort(
+      (first, second) =>
+        getBoardDistance(initialTarget.position, first.position) - getBoardDistance(initialTarget.position, second.position) ||
+        first.currentHp - second.currentHp,
+    )
+    .slice(0, effect.chainCount ?? 1);
+
+  if (targets.length === 0) {
+    return [];
+  }
+
+  const events: CombatEvent[] = [
+    {
+      type: 'chainLightning',
+      sourceInstanceId: attacker.instanceId,
+      initialTargetInstanceId: initialTarget.instanceId,
+      targetInstanceIds: targets.map((target) => target.instanceId),
+    },
+  ];
+  const damage = Math.max(1, Math.round(effect.value * attacker.skillPowerMultiplier));
+
+  for (const target of targets) {
+    const damageEvent = {
+      ...applyDamage(attacker, target, damage, 'item'),
+      damageType: 'magic' as const,
+    };
+    events.push(damageEvent);
+
+    const reviveEvent = tryRevive(target);
+    if (reviveEvent) {
+      events.push(reviveEvent);
+    }
+
+    pushOptionalEvent(events, gainMana(target, DAMAGE_TAKEN_MANA_GAIN, 'damageTaken'));
+
+    if (!target.isAlive) {
+      events.push({ type: 'death', unitInstanceId: target.instanceId });
+    }
+  }
+
+  return events;
 }
 
 export function resetCombatHp(boardUnits: BoardUnit[]): BoardUnit[] {

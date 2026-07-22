@@ -235,6 +235,18 @@ export const items: Item[] = [
     ],
     recipe: ['iron-blade', 'focus-charm'],
   },
+  {
+    id: 'lightning-bow',
+    name: '번개 활',
+    description: '공격 속도와 스킬 위력을 얻고, 기본 공격 적중 시 주변 적에게 연쇄 번개를 발사합니다.',
+    statBonus: { attackSpeed: 0.15, skillPower: 15 },
+    effects: [
+      { type: 'attackSpeedFlat', value: 0.15 },
+      { type: 'skillPowerPercent', value: 15 },
+      { type: 'chainLightningOnBasicAttack', value: 35, radius: 2, chainCount: 2 },
+    ],
+    recipe: ['swift-bow', 'mystic-staff'],
+  },
 ];
 
 export const starterItemIds: Item['id'][] = ['iron-blade', 'giant-belt', 'swift-bow'];

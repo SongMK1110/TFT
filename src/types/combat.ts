@@ -75,7 +75,7 @@ export type DamageEvent = {
   type: 'damage';
   sourceInstanceId: string;
   targetInstanceId: string;
-  source: 'basicAttack' | 'skill';
+  source: 'basicAttack' | 'skill' | 'item';
   damageType: DamageType;
   amount: number;
   absorbedShield: number;
@@ -99,6 +99,13 @@ export type ReviveEvent = {
   unitInstanceId: string;
   amount: number;
   remainingHp: number;
+};
+
+export type ChainLightningEvent = {
+  type: 'chainLightning';
+  sourceInstanceId: string;
+  initialTargetInstanceId: string;
+  targetInstanceIds: string[];
 };
 
 export type ManaGainEvent = {
@@ -162,6 +169,7 @@ export type CombatEvent =
   | MoveEvent
   | DeathEvent
   | ReviveEvent
+  | ChainLightningEvent
   | ManaGainEvent
   | HealEvent
   | ShieldEvent

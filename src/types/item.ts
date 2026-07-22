@@ -19,12 +19,14 @@ export type ItemEffectType =
   | 'nearbyEnemyAttackSpeedReduction'
   | 'bonusDamageAgainstHighHp'
   | 'reviveOnLethalDamage'
-  | 'basicAttackLifesteal';
+  | 'basicAttackLifesteal'
+  | 'chainLightningOnBasicAttack';
 
 export type ItemEffect = {
   type: ItemEffectType;
   value: number;
   radius?: number;
+  chainCount?: number;
   targetMaxHpThreshold?: number;
 };
 

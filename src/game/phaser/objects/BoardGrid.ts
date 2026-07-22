@@ -631,7 +631,7 @@ export class BoardGrid {
           const isStrongHit = event.amount >= target.maxHp * STRONG_HIT_DAMAGE_THRESHOLD_RATIO;
           if (event.source === 'skill') {
             this.playUnitSkillDamageEffect(source, target, event.amount, layout);
-          } else {
+          } else if (event.source === 'basicAttack') {
             this.playBasicAttackEffect(source, target, event.amount, layout);
             if (!['thunder-bruiser', 'dawn-warden', 'ember-guard', 'cinder-duelist', 'shade-stalker', 'ironwood-bulwark'].includes(source.unitId)) {
               this.playHitEffect(target, layout);
@@ -640,10 +640,18 @@ export class BoardGrid {
           this.playFloatingText(
             target.position,
             `-${event.amount}`,
-            isStrongHit ? CRITICAL_TEXT_COLOR : DAMAGE_TEXT_COLOR,
+            event.source === 'item' ? '#a5f3fc' : isStrongHit ? CRITICAL_TEXT_COLOR : DAMAGE_TEXT_COLOR,
             layout,
             isStrongHit ? 1.25 : 1,
           );
+        }
+      }
+
+      if (event.type === 'chainLightning') {
+        const initialTarget = combatUnits.find((unit) => unit.instanceId === event.initialTargetInstanceId);
+
+        if (initialTarget) {
+          this.playItemChainLightning(initialTarget, event.targetInstanceIds, combatUnits, layout);
         }
       }
 
@@ -950,6 +958,32 @@ export class BoardGrid {
     const bolt = this.scene.add.sprite(sourceCenter.x, sourceCenter.y, STORM_RANGER_LIGHTNING_BOLT_KEY, 0).setScale((layout.tileSize * 0.36) / 128).setDepth(90).play(STORM_RANGER_LIGHTNING_BOLT_ANIMATION_KEY);
     this.registerEffect(bolt, PROJECTILE_TWEEN_MS + 100);
     this.scene.tweens.add({ targets: bolt, x: targetCenter.x, y: targetCenter.y, duration: PROJECTILE_TWEEN_MS, ease: 'Sine.easeIn', onComplete: () => bolt.destroy() });
+  }
+
+  private playItemChainLightning(
+    initialTarget: CombatUnit,
+    targetInstanceIds: string[],
+    combatUnits: CombatUnit[],
+    layout: BoardLayout,
+  ) {
+    let previousTarget = initialTarget;
+
+    targetInstanceIds.forEach((targetInstanceId, index) => {
+      const target = combatUnits.find((unit) => unit.instanceId === targetInstanceId);
+
+      if (!target) {
+        return;
+      }
+
+      const sourceCenter = boardToPhaserPosition(previousTarget.position, layout);
+      const targetCenter = boardToPhaserPosition(target.position, layout);
+
+      this.scene.time.delayedCall(index * 80, () => {
+        this.playStormRangerLightningBolt(sourceCenter, targetCenter, layout);
+        this.playShockwave(targetCenter, layout.tileSize * 0.16, layout, 0x67e8f9);
+      });
+      previousTarget = target;
+    });
   }
 
   private playThunderBruiserPunchEffect(targetCenter: BoardPixelPosition, layout: BoardLayout) {
