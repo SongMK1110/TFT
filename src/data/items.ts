@@ -247,6 +247,17 @@ export const items: Item[] = [
     ],
     recipe: ['swift-bow', 'mystic-staff'],
   },
+  {
+    id: 'deathblade',
+    name: '죽음의 검',
+    description: '공격력을 크게 얻고, 적을 처치할 때마다 공격력이 누적 상승합니다.',
+    statBonus: { attackDamage: 25 },
+    effects: [
+      { type: 'attackDamageFlat', value: 25 },
+      { type: 'attackDamageOnKill', value: 10 },
+    ],
+    recipe: ['iron-blade', 'iron-blade'],
+  },
 ];
 
 export const starterItemIds: Item['id'][] = ['iron-blade', 'giant-belt', 'swift-bow'];

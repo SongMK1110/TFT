@@ -21,6 +21,7 @@ import giantSlayerIcon from '../../assets/generated/items/completed/giant-slayer
 import guardianAngelIcon from '../../assets/generated/items/completed/guardian-angel/frames/guardian-angel_01.png';
 import bloodthirsterIcon from '../../assets/generated/items/completed/bloodthirster/frames/bloodthirster_01.png';
 import lightningBowIcon from '../../assets/generated/items/completed/lightning-bow/frames/lightning-bow_01.png';
+import deathbladeIcon from '../../assets/generated/items/completed/deathblade/frames/deathblade_01.png';
 import type { Item } from '../types/item';
 
 export const itemIconUrls: Record<Item['id'], string> = {
@@ -47,4 +48,5 @@ export const itemIconUrls: Record<Item['id'], string> = {
   'guardian-angel': guardianAngelIcon,
   bloodthirster: bloodthirsterIcon,
   'lightning-bow': lightningBowIcon,
+  deathblade: deathbladeIcon,
 };

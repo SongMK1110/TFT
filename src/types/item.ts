@@ -20,7 +20,8 @@ export type ItemEffectType =
   | 'bonusDamageAgainstHighHp'
   | 'reviveOnLethalDamage'
   | 'basicAttackLifesteal'
-  | 'chainLightningOnBasicAttack';
+  | 'chainLightningOnBasicAttack'
+  | 'attackDamageOnKill';
 
 export type ItemEffect = {
   type: ItemEffectType;

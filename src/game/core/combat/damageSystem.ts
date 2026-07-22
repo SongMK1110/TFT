@@ -5,6 +5,7 @@ import {
   type CombatUnit,
   type DamageEvent,
   type HealEvent,
+  type ItemStackEvent,
   type ReviveEvent,
 } from '../../../types/combat';
 
@@ -118,6 +119,31 @@ export function applyBasicAttackLifesteal(attacker: CombatUnit, healthDamage: nu
     targetInstanceId: attacker.instanceId,
     amount,
     remainingHp: attacker.currentHp,
+  };
+}
+
+export function applyOnKillItemEffects(attacker: CombatUnit): ItemStackEvent | undefined {
+  const amount = attacker.items.reduce(
+    (total, item) =>
+      total +
+      item.effects.reduce(
+        (itemTotal, effect) => (effect.type === 'attackDamageOnKill' ? itemTotal + effect.value : itemTotal),
+        0,
+      ),
+    0,
+  );
+
+  if (amount <= 0) {
+    return undefined;
+  }
+
+  attacker.attackDamage += amount;
+
+  return {
+    type: 'itemStack',
+    sourceInstanceId: attacker.instanceId,
+    itemId: 'deathblade',
+    amount,
   };
 }
 

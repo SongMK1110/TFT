@@ -8,7 +8,7 @@ import type {
   StatusEffectEvent,
 } from '../../../types/combat';
 import type { SkillEffect } from '../../../types/unit';
-import { applyDamage, tryRevive } from './damageSystem';
+import { applyDamage, applyOnKillItemEffects, tryRevive } from './damageSystem';
 import { getBoardDistance } from './targetSystem';
 
 type ManaGainSource = ManaGainEvent['source'];
@@ -144,7 +144,9 @@ function applySkillDamage(caster: CombatUnit, target: CombatUnit, amount: number
   }
 
   if (!target.isAlive) {
-    return [damageEvent, { type: 'death', unitInstanceId: target.instanceId }];
+    const onKillEvent = applyOnKillItemEffects(caster);
+
+    return onKillEvent ? [damageEvent, onKillEvent, { type: 'death', unitInstanceId: target.instanceId }] : [damageEvent, { type: 'death', unitInstanceId: target.instanceId }];
   }
 
   return [damageEvent];

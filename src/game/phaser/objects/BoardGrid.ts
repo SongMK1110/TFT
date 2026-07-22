@@ -706,6 +706,14 @@ export class BoardGrid {
         }
       }
 
+      if (event.type === 'itemStack') {
+        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
+
+        if (source && event.itemId === 'deathblade') {
+          this.playDeathbladeStackEffect(source, event.amount, layout);
+        }
+      }
+
       if (event.type === 'death') {
         const unit = combatUnits.find((candidate) => candidate.instanceId === event.unitInstanceId);
 
@@ -2165,6 +2173,14 @@ export class BoardGrid {
       ease: 'Cubic.easeOut',
       onComplete: () => glow.destroy(),
     });
+  }
+
+  private playDeathbladeStackEffect(unit: CombatUnit, amount: number, layout: BoardLayout) {
+    const center = boardToPhaserPosition(unit.position, layout);
+
+    this.playSparkBurst(center, IMPACT_SPARK_COUNT + 3, 0xf43f5e, layout, 100);
+    this.playShockwave(center, layout.tileSize * 0.2, layout, 0xfb7185);
+    this.playFloatingText(unit.position, `공격력 +${amount}`, '#fecdd3', layout, 1.08);
   }
 
   private playResultBanner(result: CombatResult, layout: BoardLayout) {

@@ -4,7 +4,7 @@ import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
 import { applyItemEffects, equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
-import { applyBasicAttackLifesteal, applyDamage, calculateBasicAttackDamage, tryRevive } from './combat/damageSystem';
+import { applyBasicAttackLifesteal, applyDamage, applyOnKillItemEffects, calculateBasicAttackDamage, tryRevive } from './combat/damageSystem';
 import { stepCombat } from './combat/combatEngine';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
@@ -160,6 +160,13 @@ describe('core regression checks', () => {
     expect(chainEvent).toMatchObject({ type: 'chainLightning', targetInstanceIds: ['chain-one', 'chain-two'] });
     expect(lightningDamageEvents).toHaveLength(2);
     expect(lightningDamageEvents.every((event) => event.damageType === 'magic')).toBe(true);
+  });
+
+  it('stacks deathblade attack damage after a kill', () => {
+    const [attacker] = applyItemEffects([createCombatUnit('deathblade-holder', 'player', { row: 3, col: 3 }, { items: [getItem('deathblade')] })]);
+
+    expect(applyOnKillItemEffects(attacker)).toMatchObject({ type: 'itemStack', itemId: 'deathblade', amount: 10 });
+    expect(attacker.attackDamage).toBe(75);
   });
 
   it('calculates economy rewards and level progress deterministically', () => {

@@ -11,7 +11,7 @@ import {
   type CombatUnit,
 } from '../../../types/combat';
 import type { BoardUnit } from '../../../types/game';
-import { applyBasicAttackLifesteal, applyDamage, calculateBasicAttackDamage, tryRevive } from './damageSystem';
+import { applyBasicAttackLifesteal, applyDamage, applyOnKillItemEffects, calculateBasicAttackDamage, tryRevive } from './damageSystem';
 import { tryMoveTowardTarget } from './movementSystem';
 import { getCombatResult } from './resultSystem';
 import { canCastSkill, castSkill, gainMana } from './skillSystem';
@@ -118,6 +118,7 @@ export function stepCombat(state: CombatState, deltaMs: number): CombatStepResul
       }
 
       if (!currentTarget.isAlive) {
+        pushOptionalEvent(events, applyOnKillItemEffects(unit));
         events.push({
           type: 'death',
           unitInstanceId: currentTarget.instanceId,
@@ -195,6 +196,7 @@ function resolveChainLightning(attacker: CombatUnit, initialTarget: CombatUnit, 
     pushOptionalEvent(events, gainMana(target, DAMAGE_TAKEN_MANA_GAIN, 'damageTaken'));
 
     if (!target.isAlive) {
+      pushOptionalEvent(events, applyOnKillItemEffects(attacker));
       events.push({ type: 'death', unitInstanceId: target.instanceId });
     }
   }

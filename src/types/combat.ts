@@ -108,6 +108,13 @@ export type ChainLightningEvent = {
   targetInstanceIds: string[];
 };
 
+export type ItemStackEvent = {
+  type: 'itemStack';
+  sourceInstanceId: string;
+  itemId: Item['id'];
+  amount: number;
+};
+
 export type ManaGainEvent = {
   type: 'manaGain';
   unitInstanceId: string;
@@ -170,6 +177,7 @@ export type CombatEvent =
   | DeathEvent
   | ReviveEvent
   | ChainLightningEvent
+  | ItemStackEvent
   | ManaGainEvent
   | HealEvent
   | ShieldEvent
