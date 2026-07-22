@@ -59,9 +59,6 @@ export function SaveControls() {
           <button type="button" onClick={() => grantDeveloperItems([...developerComponentBundle])}>
             재료 2세트 지급
           </button>
-          <button type="button" onClick={() => grantDeveloperItems(['frozen-heart'])}>
-            얼어붙은 심장 지급
-          </button>
         </div>
       ) : null}
 
