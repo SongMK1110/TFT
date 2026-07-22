@@ -648,10 +648,11 @@ export class BoardGrid {
       }
 
       if (event.type === 'chainLightning') {
+        const source = combatUnits.find((unit) => unit.instanceId === event.sourceInstanceId);
         const initialTarget = combatUnits.find((unit) => unit.instanceId === event.initialTargetInstanceId);
 
-        if (initialTarget) {
-          this.playItemChainLightning(initialTarget, event.targetInstanceIds, combatUnits, layout);
+        if (source && initialTarget) {
+          this.playItemChainLightning(source, initialTarget, event.targetInstanceIds, combatUnits, layout);
         }
       }
 
@@ -961,11 +962,19 @@ export class BoardGrid {
   }
 
   private playItemChainLightning(
+    source: CombatUnit,
     initialTarget: CombatUnit,
     targetInstanceIds: string[],
     combatUnits: CombatUnit[],
     layout: BoardLayout,
   ) {
+    this.playStormRangerLightningBolt(
+      boardToPhaserPosition(source.position, layout),
+      boardToPhaserPosition(initialTarget.position, layout),
+      layout,
+    );
+    this.playShockwave(boardToPhaserPosition(initialTarget.position, layout), layout.tileSize * 0.16, layout, 0x67e8f9);
+
     let previousTarget = initialTarget;
 
     targetInstanceIds.forEach((targetInstanceId, index) => {

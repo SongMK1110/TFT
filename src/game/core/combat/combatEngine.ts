@@ -165,10 +165,6 @@ function resolveChainLightning(attacker: CombatUnit, initialTarget: CombatUnit, 
     )
     .slice(0, effect.chainCount ?? 1);
 
-  if (targets.length === 0) {
-    return [];
-  }
-
   const events: CombatEvent[] = [
     {
       type: 'chainLightning',
@@ -177,6 +173,11 @@ function resolveChainLightning(attacker: CombatUnit, initialTarget: CombatUnit, 
       targetInstanceIds: targets.map((target) => target.instanceId),
     },
   ];
+
+  if (targets.length === 0) {
+    return events;
+  }
+
   const damage = Math.max(1, Math.round(effect.value * attacker.skillPowerMultiplier));
 
   for (const target of targets) {
