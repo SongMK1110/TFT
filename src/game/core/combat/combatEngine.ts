@@ -11,7 +11,7 @@ import {
   type CombatUnit,
 } from '../../../types/combat';
 import type { BoardUnit } from '../../../types/game';
-import { applyDamage, calculateBasicAttackDamage } from './damageSystem';
+import { applyDamage, calculateBasicAttackDamage, tryRevive } from './damageSystem';
 import { tryMoveTowardTarget } from './movementSystem';
 import { getCombatResult } from './resultSystem';
 import { canCastSkill, castSkill, gainMana } from './skillSystem';
@@ -105,6 +105,11 @@ export function stepCombat(state: CombatState, deltaMs: number): CombatStepResul
       const damageEvent = applyDamage(unit, currentTarget, damage);
       unit.nextAttackAtMs = nextState.elapsedMs + getAttackCooldownMs(unit);
       events.push(damageEvent);
+      const reviveEvent = tryRevive(currentTarget);
+
+      if (reviveEvent) {
+        events.push(reviveEvent);
+      }
       pushOptionalEvent(events, gainMana(unit, BASIC_ATTACK_MANA_GAIN, 'basicAttack'));
 
       if (currentTarget.isAlive) {
@@ -184,6 +189,7 @@ function createCombatUnit(unit: BoardUnit, team: CombatTeam, instanceId: string,
       statBonus: { ...item.statBonus },
       effects: item.effects.map((effect) => ({ ...effect })),
     })),
+    usedItemEffectIds: [],
     statusEffects: [],
     isAlive: true,
     nextAttackAtMs: 0,

@@ -8,7 +8,7 @@ import type {
   StatusEffectEvent,
 } from '../../../types/combat';
 import type { SkillEffect } from '../../../types/unit';
-import { applyDamage } from './damageSystem';
+import { applyDamage, tryRevive } from './damageSystem';
 import { getBoardDistance } from './targetSystem';
 
 type ManaGainSource = ManaGainEvent['source'];
@@ -136,6 +136,12 @@ function applySkillDamage(caster: CombatUnit, target: CombatUnit, amount: number
     ...applyDamage(caster, target, amount, 'skill'),
     damageType: 'magic' as const,
   };
+
+  const reviveEvent = tryRevive(target);
+
+  if (reviveEvent) {
+    return [damageEvent, reviveEvent];
+  }
 
   if (!target.isAlive) {
     return [damageEvent, { type: 'death', unitInstanceId: target.instanceId }];

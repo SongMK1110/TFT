@@ -49,6 +49,7 @@ export type CombatUnit = {
   skillId: Skill['id'];
   skill: Skill;
   items: Item[];
+  usedItemEffectIds: string[];
   statusEffects: CombatStatusEffect[];
   isAlive: boolean;
   nextAttackAtMs: number;
@@ -91,6 +92,13 @@ export type MoveEvent = {
 export type DeathEvent = {
   type: 'death';
   unitInstanceId: string;
+};
+
+export type ReviveEvent = {
+  type: 'revive';
+  unitInstanceId: string;
+  amount: number;
+  remainingHp: number;
 };
 
 export type ManaGainEvent = {
@@ -153,6 +161,7 @@ export type CombatEvent =
   | DamageEvent
   | MoveEvent
   | DeathEvent
+  | ReviveEvent
   | ManaGainEvent
   | HealEvent
   | ShieldEvent

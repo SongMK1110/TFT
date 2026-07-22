@@ -174,6 +174,7 @@ function cloneCombatUnit(unit: CombatUnit): CombatUnit {
       statBonus: { ...item.statBonus },
       effects: item.effects.map((effect) => ({ ...effect })),
     })),
+    usedItemEffectIds: [...unit.usedItemEffectIds],
     shields: unit.shields.map((shield) => ({ ...shield })),
     statusEffects: unit.statusEffects.map((effect) => ({ ...effect })),
   };

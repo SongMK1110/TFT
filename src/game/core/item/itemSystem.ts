@@ -283,6 +283,7 @@ function cloneCombatUnit(unit: CombatUnit): CombatUnit {
     ...unit,
     position: { ...unit.position },
     items: unit.items.map(cloneItem),
+    usedItemEffectIds: [...unit.usedItemEffectIds],
     shields: unit.shields.map((shield) => ({ ...shield })),
     statusEffects: unit.statusEffects.map((effect) => ({ ...effect })),
   };

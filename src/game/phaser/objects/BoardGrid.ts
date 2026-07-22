@@ -689,6 +689,14 @@ export class BoardGrid {
         }
       }
 
+      if (event.type === 'revive') {
+        const unit = combatUnits.find((candidate) => candidate.instanceId === event.unitInstanceId);
+
+        if (unit) {
+          this.playGuardianAngelReviveEffect(unit, event.amount, layout);
+        }
+      }
+
       if (event.type === 'death') {
         const unit = combatUnits.find((candidate) => candidate.instanceId === event.unitInstanceId);
 
@@ -2065,6 +2073,37 @@ export class BoardGrid {
       duration: DEATH_FADE_TWEEN_MS,
       ease: 'Cubic.easeIn',
       onComplete: () => ghost.destroy(),
+    });
+  }
+
+  private playGuardianAngelReviveEffect(unit: CombatUnit, amount: number, layout: BoardLayout) {
+    const center = boardToPhaserPosition(unit.position, layout);
+    const halo = this.scene.add
+      .ellipse(center.x, center.y, layout.tileSize * 0.65, layout.tileSize * 0.24, 0xfbbf24, 0.2)
+      .setStrokeStyle(3, 0xfef3c7, 0.95)
+      .setDepth(88);
+    const glow = this.scene.add.circle(center.x, center.y, layout.tileSize * 0.26, 0xfef3c7, 0.5).setDepth(87);
+
+    this.playSparkBurst(center, IMPACT_SPARK_COUNT + 6, 0xfef3c7, layout, 130);
+    this.playFloatingText(unit.position, `부활 +${amount}`, '#fef3c7', layout, 1.2);
+    this.registerEffect(halo, 620);
+    this.registerEffect(glow, 520);
+    this.scene.tweens.add({
+      targets: halo,
+      scaleX: 2.2,
+      scaleY: 2.2,
+      alpha: 0,
+      duration: 560,
+      ease: 'Cubic.easeOut',
+      onComplete: () => halo.destroy(),
+    });
+    this.scene.tweens.add({
+      targets: glow,
+      scale: 1.8,
+      alpha: 0,
+      duration: 460,
+      ease: 'Cubic.easeOut',
+      onComplete: () => glow.destroy(),
     });
   }
 

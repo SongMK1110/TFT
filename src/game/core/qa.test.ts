@@ -4,7 +4,7 @@ import { synergies } from '../../data/synergies';
 import { units } from '../../data/units';
 import { calculateRoundReward, applyRoundXp } from './economy/economySystem';
 import { applyItemEffects, equipItem, getItemAdjustedUnitStats } from './item/itemSystem';
-import { applyDamage, calculateBasicAttackDamage } from './combat/damageSystem';
+import { applyDamage, calculateBasicAttackDamage, tryRevive } from './combat/damageSystem';
 import { getBestMovementCandidate } from './combat/movementSystem';
 import { getCombatResult } from './combat/resultSystem';
 import { findBestTarget } from './combat/targetSystem';
@@ -124,6 +124,19 @@ describe('core regression checks', () => {
     expect(calculateBasicAttackDamage(equippedAttacker, standardTarget)).toBe(55);
   });
 
+  it('revives a guardian angel holder once after lethal damage', () => {
+    const attacker = createCombatUnit('attacker', 'enemy', { row: 0, col: 3 });
+    const target = createCombatUnit('guardian', 'player', { row: 3, col: 3 }, { maxHp: 200, currentHp: 20, items: [getItem('guardian-angel')] });
+
+    applyDamage(attacker, target, 50);
+    expect(tryRevive(target)).toMatchObject({ type: 'revive', amount: 70, remainingHp: 70 });
+    expect(target.isAlive).toBe(true);
+
+    applyDamage(attacker, target, 100);
+    expect(tryRevive(target)).toBeUndefined();
+    expect(target.isAlive).toBe(false);
+  });
+
   it('calculates economy rewards and level progress deterministically', () => {
     const reward = calculateRoundReward({
       outcome: 'win',
@@ -238,6 +251,7 @@ function createCombatUnit(
     skillId: unit.skillId,
     skill: unit.skill,
     items: [],
+    usedItemEffectIds: [],
     statusEffects: [],
     isAlive: true,
     nextAttackAtMs: 0,

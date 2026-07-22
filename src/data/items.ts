@@ -211,6 +211,18 @@ export const items: Item[] = [
     ],
     recipe: ['iron-blade', 'giant-belt'],
   },
+  {
+    id: 'guardian-angel',
+    name: '수호 천사',
+    description: '방어력과 공격 속도를 얻고, 처치될 때 한 번 부활합니다.',
+    statBonus: { armor: 18, attackSpeed: 0.1 },
+    effects: [
+      { type: 'armorFlat', value: 18 },
+      { type: 'attackSpeedFlat', value: 0.1 },
+      { type: 'reviveOnLethalDamage', value: 35 },
+    ],
+    recipe: ['swift-bow', 'guardian-armor'],
+  },
 ];
 
 export const starterItemIds: Item['id'][] = ['iron-blade', 'giant-belt', 'swift-bow'];

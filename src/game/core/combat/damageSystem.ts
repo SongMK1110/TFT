@@ -4,6 +4,7 @@ import {
   MIN_BASIC_ATTACK_DAMAGE,
   type CombatUnit,
   type DamageEvent,
+  type ReviveEvent,
 } from '../../../types/combat';
 
 export function calculateBasicAttackDamage(attacker: CombatUnit, target: CombatUnit): number {
@@ -54,6 +55,38 @@ export function applyDamage(
     absorbedShield,
     remainingHp: target.currentHp,
   };
+}
+
+export function tryRevive(target: CombatUnit): ReviveEvent | undefined {
+  if (target.isAlive) {
+    return undefined;
+  }
+
+  for (const item of target.items) {
+    const effect = item.effects.find((candidate) => candidate.type === 'reviveOnLethalDamage');
+    const effectId = `${item.id}-reviveOnLethalDamage`;
+
+    if (!effect || target.usedItemEffectIds.includes(effectId)) {
+      continue;
+    }
+
+    const restoredHp = Math.max(1, Math.round(target.maxHp * (effect.value / 100)));
+    target.isAlive = true;
+    target.currentHp = restoredHp;
+    target.currentMana = 0;
+    target.shield = 0;
+    target.shields = [];
+    target.usedItemEffectIds = [...target.usedItemEffectIds, effectId];
+
+    return {
+      type: 'revive',
+      unitInstanceId: target.instanceId,
+      amount: restoredHp,
+      remainingHp: restoredHp,
+    };
+  }
+
+  return undefined;
 }
 
 function isCriticalHit(attacker: CombatUnit): boolean {

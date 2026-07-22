@@ -17,7 +17,8 @@ export type ItemEffectType =
   | 'maxManaReduction'
   | 'startingManaFlat'
   | 'nearbyEnemyAttackSpeedReduction'
-  | 'bonusDamageAgainstHighHp';
+  | 'bonusDamageAgainstHighHp'
+  | 'reviveOnLethalDamage';
 
 export type ItemEffect = {
   type: ItemEffectType;
