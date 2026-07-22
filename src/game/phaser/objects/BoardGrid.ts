@@ -2078,21 +2078,38 @@ export class BoardGrid {
 
   private playGuardianAngelReviveEffect(unit: CombatUnit, amount: number, layout: BoardLayout) {
     const center = boardToPhaserPosition(unit.position, layout);
+    const unitView = this.unitViewById.get(unit.instanceId);
     const halo = this.scene.add
       .ellipse(center.x, center.y, layout.tileSize * 0.65, layout.tileSize * 0.24, 0xfbbf24, 0.2)
       .setStrokeStyle(3, 0xfef3c7, 0.95)
       .setDepth(88);
     const glow = this.scene.add.circle(center.x, center.y, layout.tileSize * 0.26, 0xfef3c7, 0.5).setDepth(87);
 
+    unitView?.setAlpha(0).setScale(0.7);
+    this.playDeathEffect(unit, layout);
     this.playSparkBurst(center, IMPACT_SPARK_COUNT + 6, 0xfef3c7, layout, 130);
     this.playFloatingText(unit.position, `부활 +${amount}`, '#fef3c7', layout, 1.2);
     this.registerEffect(halo, 620);
     this.registerEffect(glow, 520);
+
+    if (unitView) {
+      this.scene.tweens.add({
+        targets: unitView,
+        alpha: 1,
+        scaleX: 1,
+        scaleY: 1,
+        delay: 120,
+        duration: 180,
+        ease: 'Back.easeOut',
+      });
+    }
+
     this.scene.tweens.add({
       targets: halo,
       scaleX: 2.2,
       scaleY: 2.2,
       alpha: 0,
+      delay: 100,
       duration: 560,
       ease: 'Cubic.easeOut',
       onComplete: () => halo.destroy(),
