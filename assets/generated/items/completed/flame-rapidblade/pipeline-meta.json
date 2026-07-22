@@ -1,0 +1,16 @@
+{
+  "name": "flame-rapidblade",
+  "source": "C:\\workspace\\project2\\assets\\generated\\items\\completed\\flame-rapidblade\\raw-icon.png",
+  "rows": 1,
+  "cols": 1,
+  "sourceCellWidth": 1254,
+  "sourceCellHeight": 1254,
+  "outputCellSize": 128,
+  "anchor": "feet",
+  "sharedScale": 0.1293302,
+  "maxContentWidth": 712,
+  "maxContentHeight": 866,
+  "frames": [
+    { "index": 1, "x": 269, "y": 180, "w": 712, "h": 866 }
+  ]
+}
