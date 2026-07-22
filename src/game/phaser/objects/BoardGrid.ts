@@ -8,6 +8,8 @@ import {
   getBoardPositionKey,
   phaserToBoardPosition,
 } from '../../core/board/boardSystem';
+import { items } from '../../../data/items';
+import { findItemRecipe } from '../../core/item/itemSystem';
 import type {
   BoardLayout,
   BoardPixelPosition,
@@ -337,12 +339,22 @@ export class BoardGrid {
 
     this.addItemIcons(container, unit.items, radius, layout.tileSize);
 
-    if (!isCombatUnit && this.renderState.dragState?.source.kind === 'item' && unit.items.length < MAX_ITEMS_PER_UNIT) {
+    const incomingItemId = this.renderState.dragState?.source.kind === 'item'
+      ? this.renderState.dragState.source.itemId
+      : undefined;
+    const recipeMatch = incomingItemId ? findItemRecipe(items, unit.items, incomingItemId) : undefined;
+    const canReceiveItem = !isCombatUnit && Boolean(incomingItemId) && (unit.items.length < MAX_ITEMS_PER_UNIT || recipeMatch);
+
+    if (canReceiveItem) {
       const itemTarget = this.scene.add
         .ellipse(0, 0, size * 0.92, size * 0.92, 0x38bdf8, 0.08)
         .setStrokeStyle(2, 0x7dd3fc, 0.9);
 
       container.add(itemTarget);
+    }
+
+    if (!isCombatUnit && recipeMatch) {
+      this.addRecipePreview(container, recipeMatch.completedItem, radius, layout.tileSize);
     }
 
     if (isCombatUnit && previousCenter && (previousCenter.x !== center.x || previousCenter.y !== center.y)) {
@@ -444,6 +456,28 @@ export class BoardGrid {
 
       container.add([badge, icon]);
     });
+  }
+
+  private addRecipePreview(container: Phaser.GameObjects.Container, item: BoardUnit['items'][number], radius: number, tileSize: number) {
+    const iconSize = Math.max(14, Math.min(20, tileSize * 0.16));
+    const width = Math.max(64, item.name.length * 10 + iconSize + 18);
+    const y = -radius * 0.9;
+    const backdrop = this.scene.add
+      .rectangle(0, y, width, iconSize + 8, 0x082f49, 0.94)
+      .setStrokeStyle(1, 0x67e8f9, 0.9);
+    const icon = this.scene.add
+      .image(-width / 2 + iconSize / 2 + 4, y, getItemIconKey(item.id))
+      .setDisplaySize(iconSize, iconSize);
+    const label = this.scene.add
+      .text(-width / 2 + iconSize + 8, y, item.name, {
+        color: '#ecfeff',
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '10px',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0, 0.5);
+
+    container.add([backdrop, icon, label]);
   }
 
   private renderUnits(boardUnits: Array<BoardUnit | CombatUnit>, layout: BoardLayout) {
